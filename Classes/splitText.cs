@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace BuscaLogo
 {
-    class SeparaTexto
+    class splitText
     {
         public static void Texto(TextReader leitor, string titulo)
         {

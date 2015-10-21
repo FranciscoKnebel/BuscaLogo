@@ -154,14 +154,14 @@
   <ItemGroup>
     <Compile Include="Classes\ArvoreBinaria.cs" />
     <Compile Include="Classes\AutoPost.cs" />
-    <Compile Include="Classes\BuscaGeolocal.cs" />
+    <Compile Include="Classes\localSearch.cs" />
     <Compile Include="Forms\Nova_Pesquisa.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Nova_Pesquisa.Designer.cs">
       <DependentUpon>Nova_Pesquisa.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\SeparaTexto.cs" />
+    <Compile Include="Classes\splitText.cs" />
     <Compile Include="Classes\Ler.cs" />
     <Compile Include="Forms\Sobre.cs">
       <SubType>Form</SubType>
@@ -230,7 +230,7 @@
     <Content Include="Resources\wpp4.png" />
     <None Include="Resources\bird.png" />
     <Content Include="Resources\bird75.ico" />
-    <Content Include="dom_casmurro.txt" />
+    <Content Include="Resources\dom_casmurro.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />

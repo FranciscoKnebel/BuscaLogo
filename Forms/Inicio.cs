@@ -22,14 +22,14 @@ namespace BuscaLogo
             InitializeComponent();
             Credenciais(); //Setup das credenciais do API      
 
-            //BuscaGeolocal a = new BuscaGeolocal();
+            //localSearch a = new localSearch();
             //a.Pesquisa();
 
             //TextReader leitor = File.OpenText(@"A:\Documentos\Dropbox\Code\C#\BuscaLogo\BuscaLogo\dom_casmurro.txt");
 
             //var loggedUser = User.GetLoggedUser();
             //AutoPost.Executa(loggedUser, leitor);
-            //SeparaTexto.Texto(leitor, "dom_casmurro");
+            //splitText.Texto(leitor, "dom_casmurro");
         }
 
         private void Credenciais()
@@ -48,19 +48,19 @@ namespace BuscaLogo
             Tweet.PublishTweet("Ediiiinhooooo, não me deixe aqui sozinhoooooooo...Ediiiiiinhooooooooo");
         }
 
-        public Form programa = new Sobre();
+        public Form aboutForm = new Sobre();
         private void sobreOProgramaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
-                programa.Show();
+                aboutForm.Show();
             }
             catch (ObjectDisposedException)
             {
-                programa = new Sobre();
-                programa.Show();
+                aboutForm = new Sobre();
+                aboutForm.Show();
             }
-            programa.Activate();
+            aboutForm.Activate();
         }
 
         private void MostraTimeline()
