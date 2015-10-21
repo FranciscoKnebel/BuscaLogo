@@ -152,17 +152,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArvoreBinaria.cs" />
-    <Compile Include="AutoPost.cs" />
-    <Compile Include="BuscaGeolocal.cs" />
+    <Compile Include="Classes\ArvoreBinaria.cs" />
+    <Compile Include="Classes\AutoPost.cs" />
+    <Compile Include="Classes\BuscaGeolocal.cs" />
     <Compile Include="Forms\Nova_Pesquisa.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Nova_Pesquisa.Designer.cs">
       <DependentUpon>Nova_Pesquisa.cs</DependentUpon>
     </Compile>
-    <Compile Include="SeparaTexto.cs" />
-    <Compile Include="Ler.cs" />
+    <Compile Include="Classes\SeparaTexto.cs" />
+    <Compile Include="Classes\Ler.cs" />
     <Compile Include="Forms\Sobre.cs">
       <SubType>Form</SubType>
     </Compile>
