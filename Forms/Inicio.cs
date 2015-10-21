@@ -108,15 +108,21 @@ namespace BuscaLogo
             MostraMentions();
         }
 
-        List<string> Lista;
+        public Form newSearch = new Nova_Pesquisa();
         private void NovaPesquisa_Click(object sender, EventArgs e)
         {
-            Lista = BuscaGeolocal.Pesquisa("chicoknebel");
-
-            for(int i = 0; i < 10; i++)
+            try
             {
-                MessageBox.Show(Lista[i]);
+                newSearch.Show();
             }
+            catch(ObjectDisposedException)
+            {
+                newSearch = new Nova_Pesquisa();
+                newSearch.Show();
+            }
+            newSearch.Activate();
         }
+
+
     }
 }

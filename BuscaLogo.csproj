@@ -155,26 +155,35 @@
     <Compile Include="ArvoreBinaria.cs" />
     <Compile Include="AutoPost.cs" />
     <Compile Include="BuscaGeolocal.cs" />
+    <Compile Include="Forms\Nova_Pesquisa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Nova_Pesquisa.Designer.cs">
+      <DependentUpon>Nova_Pesquisa.cs</DependentUpon>
+    </Compile>
     <Compile Include="SeparaTexto.cs" />
     <Compile Include="Ler.cs" />
-    <Compile Include="Sobre.cs">
+    <Compile Include="Forms\Sobre.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Sobre.Designer.cs">
+    <Compile Include="Forms\Sobre.Designer.cs">
       <DependentUpon>Sobre.cs</DependentUpon>
     </Compile>
-    <Compile Include="Inicio.cs">
+    <Compile Include="Forms\Inicio.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Inicio.Designer.cs">
+    <Compile Include="Forms\Inicio.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Sobre.resx">
+    <EmbeddedResource Include="Forms\Nova_Pesquisa.resx">
+      <DependentUpon>Nova_Pesquisa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Sobre.resx">
       <DependentUpon>Sobre.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Inicio.resx">
+    <EmbeddedResource Include="Forms\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
