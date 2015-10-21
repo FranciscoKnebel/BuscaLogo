@@ -154,7 +154,6 @@
   <ItemGroup>
     <Compile Include="Classes\ArvoreBinaria.cs" />
     <Compile Include="Classes\AutoPost.cs" />
-    <Compile Include="Classes\localSearch.cs" />
     <Compile Include="Forms\Nova_Pesquisa.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using Tweetinvi;
 using Tweetinvi.Core.Enum;
 using Tweetinvi.Core.Interfaces;
+using Tweetinvi.Core.Interfaces.Parameters;
 using Tweetinvi.Core.Parameters;
 
 namespace BuscaLogo
@@ -19,30 +14,18 @@ namespace BuscaLogo
         public Nova_Pesquisa()
         {
             InitializeComponent();
+            GeoPosBoxParameter.SetSelected(0, true); //seta <none> como Geolocal padrão
         }
 
         public static IEnumerable<ITweet> listOfTweets;
-        private void Pesquisar()
+        private IEnumerable<ITweet> Pesquisar()
         {
-
-            //Geocode = Longitude, latitude, raio, unidade de medida do raio
-            //  Campus do Vale
-            //-51.1218710,-30.0710872
-            //
-
+            // Creates the search parameter for the localSearch class search function.
             var searchParameter = new TweetSearchParameters(searchTextParameter.Text)
-             {
-                 GeoCode = new GeoCode(-51.1218710,-30.0710872, 1, DistanceMeasure.Kilometers),
-                 //Lang = Language.English,
-                 //SearchType = SearchResultType.Popular,
-                 MaximumNumberOfResults = 100,
-                 //Until = new DateTime(2015, 06, 02),
-                 //SinceId = 399616835892781056,
-                 //MaxId = 405001488843284480,
-                 //Filters = TweetSearchFilters.Images
-                 
+            {
+                MaximumNumberOfResults = (int) numberTweetsParameter.Value,
+                                 
                  /* These are all the TweetSearchParameters:
-
                 TweetSearchFilters Filters { get; set; }
                 IGeoCode GeoCode { get; set; }
                 Language Lang { get; set; }
@@ -56,18 +39,29 @@ namespace BuscaLogo
                 TweetSearchType TweetSearchType { get; set; }
                 DateTime Until { get; set; } */
             };
+
+            //if the <none> geolocation isn't selected, the user wants to set a geolocation.
+            if (!GeoPosBoxParameter.GetSelected(0)) 
+            {
+                //Geocode = (Longitude, latitude, radius, measure unit)
+                if (GeoPosBoxParameter.GetSelected(1))      //Campus Centro
+                    searchParameter.GeoCode = new GeoCode(-51.2209625, -30.0331423, (double)radiusParameter.Value, DistanceMeasure.Kilometers);
+                else if (GeoPosBoxParameter.GetSelected(2)) //Campus do Vale
+                    searchParameter.GeoCode = new GeoCode(-51.1218710, -30.0710872, (double)radiusParameter.Value, DistanceMeasure.Kilometers);
+                else if (GeoPosBoxParameter.GetSelected(3)) //Hospital de Clínicas
+                    searchParameter.GeoCode = new GeoCode(-51.2069721, -30.0390867, (double)radiusParameter.Value, DistanceMeasure.Kilometers);
+                else if (GeoPosBoxParameter.GetSelected(4)) //Aeroporto Salgado Filho
+                    searchParameter.GeoCode = new GeoCode(-51.1753810, -29.9934730, (double)radiusParameter.Value, DistanceMeasure.Kilometers);
+            }
             
-
-            listOfTweets = localSearch.Pesquisa(searchParameter);
-
-            string aux = "";
-            int i = 0;
+            listOfTweets = Search.SearchTweets(searchParameter);
             foreach(var tweet in listOfTweets)
             {
-                aux = String.Format("{0}\n{1}", aux, tweet.Text);
-                i++;
+                MessageBox.Show(String.Format("Usuário {0} (@{1}) tweetou:\n\"{2}\"\nTweet com tamanho de {3} caracters.",
+                  tweet.CreatedBy, tweet.CreatedBy.ScreenName, tweet.Text, tweet.CalculateLength(false)));
             }
-            MessageBox.Show(String.Format("{0}\nN: {1}",aux,i));
+
+            return listOfTweets;
         }
 
         private void button1_Click(object sender, EventArgs e)
