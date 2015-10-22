@@ -45,14 +45,14 @@
             // 
             this.searchTextParameter.Location = new System.Drawing.Point(65, 34);
             this.searchTextParameter.Name = "searchTextParameter";
-            this.searchTextParameter.Size = new System.Drawing.Size(196, 20);
+            this.searchTextParameter.Size = new System.Drawing.Size(223, 20);
             this.searchTextParameter.TabIndex = 0;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(110, 226);
+            this.button1.Location = new System.Drawing.Point(82, 227);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(150, 25);
             this.button1.TabIndex = 1;
             this.button1.Text = "Pesquisar";
             this.button1.UseVisualStyleBackColor = true;
@@ -111,7 +111,8 @@
             "Campus Centro",
             "Campus do Vale",
             "Hospital de Clínicas",
-            "Aeroporto Salgado Filho"});
+            "Aeroporto Salgado Filho",
+            "Mercado Público"});
             this.GeoPosBoxParameter.Location = new System.Drawing.Point(311, 34);
             this.GeoPosBoxParameter.Name = "GeoPosBoxParameter";
             this.GeoPosBoxParameter.Size = new System.Drawing.Size(132, 186);
@@ -132,7 +133,7 @@
             // radiusParameter
             // 
             this.radiusParameter.DecimalPlaces = 1;
-            this.radiusParameter.Location = new System.Drawing.Point(387, 229);
+            this.radiusParameter.Location = new System.Drawing.Point(387, 232);
             this.radiusParameter.Maximum = new decimal(new int[] {
             10,
             0,
@@ -158,7 +159,7 @@
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.Control;
-            this.label4.Location = new System.Drawing.Point(315, 231);
+            this.label4.Location = new System.Drawing.Point(314, 234);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(67, 16);
             this.label4.TabIndex = 10;

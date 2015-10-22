@@ -35,7 +35,8 @@ namespace BuscaLogo
         private void Credenciais()
         {
             // Set up your credentials (https://apps.twitter.com)
-            Auth.SetUserCredentials("qNwYoorEWFMSckTcFHIlEUwFk", "ju9lDUhUplJ70FsbqzyJcxOOkhn3c8a5v8SN4jXQzMCmgbNjCR", "3932741944-PvoLUxW9O3bOd7Pvd4erDhMk3mLVZ4ivqEaS3zE", "LezXOGueFDEUD0ymZ44yKusRCdPli3JHyzV3fOpUmiGko");
+            // These are application-only credentials, so you can't tweet.
+            Auth.SetApplicationOnlyCredentials("qNwYoorEWFMSckTcFHIlEUwFk", "ju9lDUhUplJ70FsbqzyJcxOOkhn3c8a5v8SN4jXQzMCmgbNjCR", true);
         }
 
         private void Edinho()
@@ -100,12 +101,12 @@ namespace BuscaLogo
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MostraTimeline();
+            //MostraTimeline();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            MostraMentions();
+            //MostraMentions();
         }
 
         public Form newSearch = new Nova_Pesquisa();

@@ -52,9 +52,14 @@ namespace BuscaLogo
                     searchParameter.GeoCode = new GeoCode(-51.2069721, -30.0390867, (double)radiusParameter.Value, DistanceMeasure.Kilometers);
                 else if (GeoPosBoxParameter.GetSelected(4)) //Aeroporto Salgado Filho
                     searchParameter.GeoCode = new GeoCode(-51.1753810, -29.9934730, (double)radiusParameter.Value, DistanceMeasure.Kilometers);
+                else if (GeoPosBoxParameter.GetSelected(5)) //Mercado Público
+                    searchParameter.GeoCode = new GeoCode(-51.2278460, -30.0275120, (double)radiusParameter.Value, DistanceMeasure.Kilometers);
             }
-            
+
+            string aux = button1.Text;
+            button1.Text = "Searching, please wait...";
             listOfTweets = Search.SearchTweets(searchParameter);
+            button1.Text = aux;
             foreach(var tweet in listOfTweets)
             {
                 MessageBox.Show(String.Format("Usuário {0} (@{1}) tweetou:\n\"{2}\"\nTweet com tamanho de {3} caracters.",
