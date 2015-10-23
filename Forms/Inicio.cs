@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
-using ArvoreBinaria;
 using Tweetinvi;
 using Tweetinvi.Core.Credentials;
 using Tweetinvi.Core.Interfaces;
@@ -21,9 +20,6 @@ namespace BuscaLogo
         public Inicio()
         {
             InitializeComponent();
-
-            //localSearch a = new localSearch();
-            //a.Pesquisa();
 
             //TextReader leitor = File.OpenText(@"A:\Documentos\Dropbox\Code\C#\BuscaLogo\BuscaLogo\dom_casmurro.txt");
 

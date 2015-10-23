@@ -35,6 +35,13 @@ namespace BuscaLogo
             //((KeyValuePair<string, Language>)langParameter.SelectedItem).Value; //get value of selected item in listbox
         }
 
+        public static IEnumerable<ITweet> listOfTweets;
+        private void button1_Click(object sender, EventArgs e)
+        {
+            listOfTweets = Pesquisar();
+            //PesquisarTimeline();
+        }
+
         private IEnumerable<ITweet> Pesquisar()
         {
             // Creates the search parameter for the search function.
@@ -48,7 +55,7 @@ namespace BuscaLogo
             //if the <none> geolocation isn't selected, the user wants to set a geolocation.
             //Searches through index of listbox and finds which option the user choose.
             int indexGeoPosParameter = GeoPosBoxParameter.SelectedIndex;
-            switch(indexGeoPosParameter)
+            switch (indexGeoPosParameter)
             {
                 case 1: //Campus Centro
                     searchParameter.GeoCode = new GeoCode(-51.2209625, -30.0331423, (double)radiusParameter.Value, DistanceMeasure.Kilometers);
@@ -105,31 +112,6 @@ namespace BuscaLogo
             }
         }
 
-        private TweetSearchType Type()
-        {
-            TweetSearchType retorno;
-
-            int index = tweetSearchTypeParameter.SelectedIndex;
-            switch (index)
-            {
-                case 0:
-                    retorno = TweetSearchType.All;
-                    break;
-                case 1:
-                    retorno = TweetSearchType.OriginalTweetsOnly;
-                    break;
-                case 2:
-                    retorno = TweetSearchType.RetweetsOnly;
-                    break;
-                default:
-                    MessageBox.Show("Tipo inválido. Contate o administrador.", "ERRO 0002");
-                    retorno = TweetSearchType.All;
-                    break;
-            }
-
-            return retorno;
-        }
-
         private IEnumerable<ITweet> PesquisarTimeline(string userScreenName)
         {
             var userTimelineParameter = new UserTimelineParameters()
@@ -152,13 +134,29 @@ namespace BuscaLogo
             return listOfTweets;
         }
 
-        public static IEnumerable<ITweet> listOfTweets;
-        private void button1_Click(object sender, EventArgs e)
+        private TweetSearchType Type()
         {
-            listOfTweets = Pesquisar();
-            //PesquisarTimeline();
+            TweetSearchType retorno;
+
+            int index = tweetSearchTypeParameter.SelectedIndex;
+            switch (index)
+            {
+                case 0:
+                    retorno = TweetSearchType.All;
+                    break;
+                case 1:
+                    retorno = TweetSearchType.OriginalTweetsOnly;
+                    break;
+                case 2:
+                    retorno = TweetSearchType.RetweetsOnly;
+                    break;
+                default:
+                    MessageBox.Show("Tipo inválido. Contate o administrador.\nPesquisa não irá filtrar por nenhum tipo.", "ERRO 0002");
+                    retorno = TweetSearchType.All;
+                    break;
+            }
+
+            return retorno;
         }
-
-
     }
 }

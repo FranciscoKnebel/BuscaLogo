@@ -262,7 +262,6 @@
         #endregion
 
         private System.Windows.Forms.TextBox searchTextParameter;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown numberTweetsParameter;
         private System.Windows.Forms.Label label3;
@@ -275,5 +274,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ListBox tweetSearchTypeParameter;
         private System.Windows.Forms.Label label6;
+        public System.Windows.Forms.Button button1;
     }
 }

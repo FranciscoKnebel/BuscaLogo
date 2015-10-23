@@ -9,7 +9,7 @@ using System.IO;
 using Tweetinvi;
 using Tweetinvi.Core.Credentials;
 
-namespace BuscaLogo
+namespace BuscaLogo.Classes
 {
     public class AutoPost
     {

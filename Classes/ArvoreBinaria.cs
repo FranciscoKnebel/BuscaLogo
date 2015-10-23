@@ -15,7 +15,7 @@ using System.Threading.Tasks;
             //Output: 5 7 10 12
  */
 
-namespace ArvoreBinaria
+namespace BuscaLogo.Classes
 {
         class Nodo
         {
