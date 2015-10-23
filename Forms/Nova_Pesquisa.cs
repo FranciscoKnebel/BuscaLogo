@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+
 using Tweetinvi;
 using Tweetinvi.Core.Enum;
 using Tweetinvi.Core.Interfaces;
@@ -22,6 +23,8 @@ namespace BuscaLogo
             var searchParameter = new TweetSearchParameters(searchTextParameter.Text)
             {
                 MaximumNumberOfResults = (int)numberTweetsParameter.Value,
+                Lang = ((KeyValuePair<string, Language>)langParameter.SelectedItem).Value, //get language value of selected item in langParameter listbox
+
                  /* These are all the TweetSearchParameters:
                 TweetSearchFilters Filters { get; set; }
                 IGeoCode GeoCode { get; set; }
@@ -113,6 +116,23 @@ namespace BuscaLogo
         {
             listOfTweets = Pesquisar();
             //PesquisarTimeline();
+        }
+
+        private void Nova_Pesquisa_Load(object sender, EventArgs e)
+        {
+            //Loads the listbox language values
+            Dictionary<string, Language> langParameterSource = new Dictionary<string, Language>();
+            langParameterSource.Add("<undefined>",    Language.Undefined);
+            langParameterSource.Add("Português", Language.Portuguese);
+            langParameterSource.Add("English",   Language.English);
+            langParameterSource.Add("Español",   Language.Spanish);    
+                    
+            //Bind the source Dictionary object to Combobox
+            langParameter.DataSource = new BindingSource(langParameterSource, null);
+            langParameter.DisplayMember = "Key";
+            langParameter.ValueMember = "Value";
+            //((KeyValuePair<string, Language>)langParameter.SelectedItem).Key;   //get key of selected item in listbox   
+            //((KeyValuePair<string, Language>)langParameter.SelectedItem).Value; //get value of selected item in listbox
         }
     }
 }

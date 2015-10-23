@@ -39,6 +39,8 @@
             this.radiusParameter = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.langParameter = new System.Windows.Forms.ListBox();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numberTweetsParameter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radiusParameter)).BeginInit();
             this.SuspendLayout();
@@ -69,7 +71,7 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.Control;
-            this.label1.Location = new System.Drawing.Point(12, 34);
+            this.label1.Location = new System.Drawing.Point(12, 38);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(47, 16);
             this.label1.TabIndex = 2;
@@ -77,7 +79,7 @@
             // 
             // numberTweetsParameter
             // 
-            this.numberTweetsParameter.Location = new System.Drawing.Point(110, 61);
+            this.numberTweetsParameter.Location = new System.Drawing.Point(108, 61);
             this.numberTweetsParameter.Maximum = new decimal(new int[] {
             999,
             0,
@@ -112,7 +114,7 @@
             // GeoPosBoxParameter
             // 
             this.GeoPosBoxParameter.Items.AddRange(new object[] {
-            "<none>",
+            "<undefined>",
             "Campus Centro",
             "Campus do Vale",
             "Hospital de Clínicas",
@@ -178,6 +180,26 @@
             this.progressBar.TabIndex = 11;
             this.progressBar.Visible = false;
             // 
+            // langParameter
+            // 
+            this.langParameter.FormattingEnabled = true;
+            this.langParameter.Location = new System.Drawing.Point(108, 87);
+            this.langParameter.Name = "langParameter";
+            this.langParameter.Size = new System.Drawing.Size(120, 56);
+            this.langParameter.TabIndex = 12;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.Control;
+            this.label5.Location = new System.Drawing.Point(12, 87);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(84, 16);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Linguagem";
+            // 
             // Nova_Pesquisa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -185,6 +207,8 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImage = global::BuscaLogo.Properties.Resources.wpp2;
             this.ClientSize = new System.Drawing.Size(464, 261);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.langParameter);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.radiusParameter);
@@ -199,6 +223,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Nova_Pesquisa";
             this.Text = "Nova Pesquisa";
+            this.Load += new System.EventHandler(this.Nova_Pesquisa_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numberTweetsParameter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radiusParameter)).EndInit();
             this.ResumeLayout(false);
@@ -218,5 +243,7 @@
         private System.Windows.Forms.NumericUpDown radiusParameter;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.ListBox langParameter;
+        private System.Windows.Forms.Label label5;
     }
 }
