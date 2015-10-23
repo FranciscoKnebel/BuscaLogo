@@ -24,7 +24,6 @@ namespace BuscaLogo
             {
                 MaximumNumberOfResults = (int)numberTweetsParameter.Value,
                 Lang = ((KeyValuePair<string, Language>)langParameter.SelectedItem).Value, //get language value of selected item in langParameter listbox
-
                  /* These are all the TweetSearchParameters:
                 TweetSearchFilters Filters { get; set; }
                 IGeoCode GeoCode { get; set; }
@@ -41,21 +40,34 @@ namespace BuscaLogo
             };
 
             //if the <none> geolocation isn't selected, the user wants to set a geolocation.
-            if (!GeoPosBoxParameter.GetSelected(0)) 
+            //Searches through index of listbox and finds which option the user choose.
+            int indexGeoPosParameter = GeoPosBoxParameter.SelectedIndex;
+            switch(indexGeoPosParameter)
             {
-                //Geocode = (Longitude, latitude, radius, measure unit)
-                if (GeoPosBoxParameter.GetSelected(1))      //Campus Centro
+                case 1: //Campus Centro
                     searchParameter.GeoCode = new GeoCode(-51.2209625, -30.0331423, (double)radiusParameter.Value, DistanceMeasure.Kilometers);
-                else if (GeoPosBoxParameter.GetSelected(2)) //Campus do Vale
+                    break;
+                case 2: //Campus do Vale
                     searchParameter.GeoCode = new GeoCode(-51.1218710, -30.0710872, (double)radiusParameter.Value, DistanceMeasure.Kilometers);
-                else if (GeoPosBoxParameter.GetSelected(3)) //Hospital de Clínicas
+                    break;
+                case 3: //Hospital de Clínicas
                     searchParameter.GeoCode = new GeoCode(-51.2069721, -30.0390867, (double)radiusParameter.Value, DistanceMeasure.Kilometers);
-                else if (GeoPosBoxParameter.GetSelected(4)) //Aeroporto Salgado Filho
+                    break;
+                case 4: //Aeroporto Salgado Filho
                     searchParameter.GeoCode = new GeoCode(-51.1753810, -29.9934730, (double)radiusParameter.Value, DistanceMeasure.Kilometers);
-                else if (GeoPosBoxParameter.GetSelected(5)) //Mercado Público
+                    break;
+                case 5: //Mercado Público
                     searchParameter.GeoCode = new GeoCode(-51.2278460, -30.0275120, (double)radiusParameter.Value, DistanceMeasure.Kilometers);
+                    break;
+                default: //Geolocale not defined
+                    break;
             }
 
+            return Pesquisar(searchParameter);
+        }
+
+        private IEnumerable<ITweet> Pesquisar(TweetSearchParameters searchParameter)
+        {
             string aux = button1.Text;
             if ((searchParameter.SearchQuery != "") || (searchParameter.GeoCode != null)) //usuário passou parâmetros
             {
@@ -85,8 +97,6 @@ namespace BuscaLogo
                 MessageBox.Show("Pesquisa sem parâmetros!\nInsira pelos menos um query de texto ou um geolocal.", "ERROR 0001");
                 return null;
             }
-                
-            
         }
 
         private IEnumerable<ITweet> PesquisarTimeline(string userScreenName)
