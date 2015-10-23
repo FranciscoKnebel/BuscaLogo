@@ -4,7 +4,6 @@ using System.Windows.Forms;
 using Tweetinvi;
 using Tweetinvi.Core.Enum;
 using Tweetinvi.Core.Interfaces;
-using Tweetinvi.Core.Interfaces.Parameters;
 using Tweetinvi.Core.Parameters;
 
 namespace BuscaLogo
@@ -17,14 +16,12 @@ namespace BuscaLogo
             GeoPosBoxParameter.SetSelected(0, true); //seta <none> como Geolocal padrão
         }
 
-        public static IEnumerable<ITweet> listOfTweets;
         private IEnumerable<ITweet> Pesquisar()
         {
-            // Creates the search parameter for the localSearch class search function.
+            // Creates the search parameter for the search function.
             var searchParameter = new TweetSearchParameters(searchTextParameter.Text)
             {
-                MaximumNumberOfResults = (int) numberTweetsParameter.Value,
-                                 
+                MaximumNumberOfResults = (int)numberTweetsParameter.Value,
                  /* These are all the TweetSearchParameters:
                 TweetSearchFilters Filters { get; set; }
                 IGeoCode GeoCode { get; set; }
@@ -57,10 +54,52 @@ namespace BuscaLogo
             }
 
             string aux = button1.Text;
+            if ((searchParameter.SearchQuery != "") || (searchParameter.GeoCode != null)) //usuário passou parâmetros
+            {
+                progressBar.Show();
+                button1.Text = "Searching, please wait...";
+                listOfTweets = Search.SearchTweets(searchParameter);
+                progressBar.Step = 50;
+                progressBar.PerformStep();
+
+                button1.Text = aux;
+                foreach (var tweet in listOfTweets)
+                {
+                    MessageBox.Show(String.Format("Usuário {0} (@{1}) tweetou:\n\"{2}\"\nTweet com tamanho de {3} caracters.",
+                      tweet.CreatedBy, tweet.CreatedBy.ScreenName, tweet.Text, tweet.CalculateLength(false)));
+                }
+                progressBar.PerformStep();
+
+
+                MessageBox.Show("Todos tweets lidos. Retornando a lista.");
+                progressBar.Hide();
+                progressBar.Value = 0;
+
+                return listOfTweets;
+            }
+            else
+            {
+                MessageBox.Show("Pesquisa sem parâmetros!\nInsira pelos menos um query de texto ou um geolocal.", "ERROR 0001");
+                return null;
+            }
+                
+            
+        }
+
+        private IEnumerable<ITweet> PesquisarTimeline(string userScreenName)
+        {
+            var userTimelineParameter = new UserTimelineParameters()
+            {
+                MaximumNumberOfTweetsToRetrieve = 200,
+                ExcludeReplies = true,
+                IncludeRTS = false,
+            };
+
+            string aux = button1.Text;
             button1.Text = "Searching, please wait...";
-            listOfTweets = Search.SearchTweets(searchParameter);
+            var listOfTweets = Timeline.GetUserTimeline(userScreenName, userTimelineParameter);
             button1.Text = aux;
-            foreach(var tweet in listOfTweets)
+            foreach (var tweet in listOfTweets)
             {
                 MessageBox.Show(String.Format("Usuário {0} (@{1}) tweetou:\n\"{2}\"\nTweet com tamanho de {3} caracters.",
                   tweet.CreatedBy, tweet.CreatedBy.ScreenName, tweet.Text, tweet.CalculateLength(false)));
@@ -69,9 +108,11 @@ namespace BuscaLogo
             return listOfTweets;
         }
 
+        public static IEnumerable<ITweet> listOfTweets;
         private void button1_Click(object sender, EventArgs e)
         {
-            Pesquisar();
+            listOfTweets = Pesquisar();
+            //PesquisarTimeline();
         }
     }
 }

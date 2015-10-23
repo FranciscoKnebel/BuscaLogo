@@ -12,6 +12,7 @@ using System.IO;
 using ArvoreBinaria;
 using Tweetinvi;
 using Tweetinvi.Core.Credentials;
+using Tweetinvi.Core.Interfaces;
 
 namespace BuscaLogo
 {
@@ -20,7 +21,6 @@ namespace BuscaLogo
         public Inicio()
         {
             InitializeComponent();
-            Credenciais(); //Setup das credenciais do API      
 
             //localSearch a = new localSearch();
             //a.Pesquisa();
@@ -30,6 +30,11 @@ namespace BuscaLogo
             //var loggedUser = User.GetLoggedUser();
             //AutoPost.Executa(loggedUser, leitor);
             //splitText.Texto(leitor, "dom_casmurro");
+        }
+
+        private void Inicio_Load(object sender, EventArgs e)
+        {
+            Credenciais(); //Setup das credenciais do API  
         }
 
         private void Credenciais()
@@ -106,7 +111,7 @@ namespace BuscaLogo
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //MostraMentions();
+            //MostraMentions();     
         }
 
         public Form newSearch = new Nova_Pesquisa();

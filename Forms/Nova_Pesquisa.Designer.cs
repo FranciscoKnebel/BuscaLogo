@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Nova_Pesquisa));
             this.searchTextParameter = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -37,6 +38,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.radiusParameter = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.numberTweetsParameter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radiusParameter)).BeginInit();
             this.SuspendLayout();
@@ -50,12 +52,15 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(82, 227);
+            this.button1.BackColor = System.Drawing.SystemColors.Control;
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.Location = new System.Drawing.Point(78, 228);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(150, 25);
             this.button1.TabIndex = 1;
+            this.button1.TabStop = false;
             this.button1.Text = "Pesquisar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
@@ -115,7 +120,7 @@
             "Mercado Público"});
             this.GeoPosBoxParameter.Location = new System.Drawing.Point(311, 34);
             this.GeoPosBoxParameter.Name = "GeoPosBoxParameter";
-            this.GeoPosBoxParameter.Size = new System.Drawing.Size(132, 186);
+            this.GeoPosBoxParameter.Size = new System.Drawing.Size(141, 186);
             this.GeoPosBoxParameter.TabIndex = 7;
             // 
             // label2
@@ -165,13 +170,22 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "Raio (Km)";
             // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(110, 210);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(85, 18);
+            this.progressBar.TabIndex = 11;
+            this.progressBar.Visible = false;
+            // 
             // Nova_Pesquisa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImage = global::BuscaLogo.Properties.Resources.wpp2;
-            this.ClientSize = new System.Drawing.Size(449, 261);
+            this.ClientSize = new System.Drawing.Size(464, 261);
+            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.radiusParameter);
             this.Controls.Add(this.label2);
@@ -181,8 +195,10 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.searchTextParameter);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Nova_Pesquisa";
-            this.Text = "NovaPesquisa";
+            this.Text = "Nova Pesquisa";
             ((System.ComponentModel.ISupportInitialize)(this.numberTweetsParameter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radiusParameter)).EndInit();
             this.ResumeLayout(false);
@@ -201,5 +217,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown radiusParameter;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ProgressBar progressBar;
     }
 }
