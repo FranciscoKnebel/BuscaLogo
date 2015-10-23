@@ -73,7 +73,7 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.Control;
-            this.label1.Location = new System.Drawing.Point(12, 38);
+            this.label1.Location = new System.Drawing.Point(12, 35);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(47, 16);
             this.label1.TabIndex = 2;
@@ -185,7 +185,7 @@
             // langParameter
             // 
             this.langParameter.FormattingEnabled = true;
-            this.langParameter.Location = new System.Drawing.Point(108, 87);
+            this.langParameter.Location = new System.Drawing.Point(97, 87);
             this.langParameter.Name = "langParameter";
             this.langParameter.Size = new System.Drawing.Size(120, 56);
             this.langParameter.TabIndex = 12;
@@ -207,9 +207,9 @@
             this.tweetSearchTypeParameter.FormattingEnabled = true;
             this.tweetSearchTypeParameter.Items.AddRange(new object[] {
             "Todos os Tweets",
-            "Excluir \tRetweets",
-            "Apenas \tRetweets"});
-            this.tweetSearchTypeParameter.Location = new System.Drawing.Point(65, 149);
+            "Excluir Retweets",
+            "Apenas Retweets"});
+            this.tweetSearchTypeParameter.Location = new System.Drawing.Point(97, 149);
             this.tweetSearchTypeParameter.Name = "tweetSearchTypeParameter";
             this.tweetSearchTypeParameter.Size = new System.Drawing.Size(120, 43);
             this.tweetSearchTypeParameter.TabIndex = 14;
@@ -220,7 +220,7 @@
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.Control;
-            this.label6.Location = new System.Drawing.Point(12, 162);
+            this.label6.Location = new System.Drawing.Point(48, 161);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(48, 16);
             this.label6.TabIndex = 15;

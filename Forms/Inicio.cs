@@ -64,6 +64,14 @@ namespace BuscaLogo
             }
             aboutForm.Activate();
         }
+        private void IconAreaNotif_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Activate();
+        }
+        private void fecharToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Dispose();
+        }
 
         private void MostraTimeline()
         {
@@ -81,7 +89,6 @@ namespace BuscaLogo
                 MessageBox.Show(aux);
             }
         }
-
         private void MostraMentions()
         {
             var loggedUser = User.GetLoggedUser();

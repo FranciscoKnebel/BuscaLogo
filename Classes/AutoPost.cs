@@ -31,10 +31,27 @@ namespace BuscaLogo.Classes
         // raised.
         private static void OnTimedEvent(object source, ElapsedEventArgs e)
         {
-            //MessageBox.Show(Ler.Texto(tweet));
-            Tweet.PublishTweet(Ler.Texto(tweet));
+            //MessageBox.Show(Texto(tweet));
+            Tweet.PublishTweet(Texto(tweet));
             //string show = "The Elapsed event was raised at " + e.SignalTime;
             //System.Windows.Forms.MessageBox.Show(show);
+        }
+
+        public static string Texto(TextReader leitor)
+        {
+            char[] buffer = new char[140];
+            StringBuilder builder = new StringBuilder("");
+
+            leitor.ReadBlock(buffer, 0, 140);   //lê um bloco de 140 caracteres e coloca no buffer
+                                                //foreach (var caracter in buffer)
+                                                //show = show + caracter.ToString();
+
+            foreach (char c in buffer)          //transforma o char[] em um construtor de strings
+                builder.Append(c);
+            //if (char.IsLetterOrDigit(c) || char.IsWhiteSpace(c))
+
+
+            return builder.ToString();          //retorna a string lida
         }
     }
 }

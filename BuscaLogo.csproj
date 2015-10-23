@@ -164,7 +164,6 @@
       <DependentUpon>Nova_Pesquisa.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\splitText.cs" />
-    <Compile Include="Classes\Ler.cs" />
     <Compile Include="Forms\Sobre.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,7 +199,6 @@
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
-    <None Include="Properties\DataSources\Tweetinvi.Core.Enum.LanguageAttribute.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

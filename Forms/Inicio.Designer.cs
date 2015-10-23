@@ -39,6 +39,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.Logo = new System.Windows.Forms.PictureBox();
+            this.fecharToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuContext.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
             this.SuspendLayout();
@@ -46,10 +47,11 @@
             // MenuContext
             // 
             this.MenuContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sobreOProgramaToolStripMenuItem});
+            this.sobreOProgramaToolStripMenuItem,
+            this.fecharToolStripMenuItem});
             this.MenuContext.Name = "contextMenuStrip1";
             this.MenuContext.ShowImageMargin = false;
-            this.MenuContext.Size = new System.Drawing.Size(154, 26);
+            this.MenuContext.Size = new System.Drawing.Size(154, 70);
             // 
             // sobreOProgramaToolStripMenuItem
             // 
@@ -85,6 +87,7 @@
             this.IconAreaNotif.Icon = ((System.Drawing.Icon)(resources.GetObject("IconAreaNotif.Icon")));
             this.IconAreaNotif.Text = "BuscaLogo";
             this.IconAreaNotif.Visible = true;
+            this.IconAreaNotif.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.IconAreaNotif_MouseDoubleClick);
             // 
             // NovaPesquisa
             // 
@@ -128,6 +131,13 @@
             this.Logo.TabIndex = 3;
             this.Logo.TabStop = false;
             // 
+            // fecharToolStripMenuItem
+            // 
+            this.fecharToolStripMenuItem.Name = "fecharToolStripMenuItem";
+            this.fecharToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.fecharToolStripMenuItem.Text = "Fechar";
+            this.fecharToolStripMenuItem.Click += new System.EventHandler(this.fecharToolStripMenuItem_Click);
+            // 
             // Inicio
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
@@ -168,6 +178,7 @@
         private System.Windows.Forms.Button NovaPesquisa;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.ToolStripMenuItem fecharToolStripMenuItem;
     }
 }
 
