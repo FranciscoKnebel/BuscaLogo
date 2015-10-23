@@ -41,6 +41,8 @@
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.langParameter = new System.Windows.Forms.ListBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.tweetSearchTypeParameter = new System.Windows.Forms.ListBox();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numberTweetsParameter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radiusParameter)).BeginInit();
             this.SuspendLayout();
@@ -194,11 +196,35 @@
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.SystemColors.Control;
-            this.label5.Location = new System.Drawing.Point(12, 87);
+            this.label5.Location = new System.Drawing.Point(12, 105);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(84, 16);
             this.label5.TabIndex = 13;
             this.label5.Text = "Linguagem";
+            // 
+            // tweetSearchTypeParameter
+            // 
+            this.tweetSearchTypeParameter.FormattingEnabled = true;
+            this.tweetSearchTypeParameter.Items.AddRange(new object[] {
+            "Todos os Tweets",
+            "Excluir \tRetweets",
+            "Apenas \tRetweets"});
+            this.tweetSearchTypeParameter.Location = new System.Drawing.Point(65, 149);
+            this.tweetSearchTypeParameter.Name = "tweetSearchTypeParameter";
+            this.tweetSearchTypeParameter.Size = new System.Drawing.Size(120, 43);
+            this.tweetSearchTypeParameter.TabIndex = 14;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.SystemColors.Control;
+            this.label6.Location = new System.Drawing.Point(12, 162);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(48, 16);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Tipos";
             // 
             // Nova_Pesquisa
             // 
@@ -207,6 +233,8 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImage = global::BuscaLogo.Properties.Resources.wpp2;
             this.ClientSize = new System.Drawing.Size(464, 261);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.tweetSearchTypeParameter);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.langParameter);
             this.Controls.Add(this.progressBar);
@@ -245,5 +273,7 @@
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.ListBox langParameter;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ListBox tweetSearchTypeParameter;
+        private System.Windows.Forms.Label label6;
     }
 }

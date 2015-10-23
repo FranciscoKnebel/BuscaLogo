@@ -14,7 +14,25 @@ namespace BuscaLogo
         public Nova_Pesquisa()
         {
             InitializeComponent();
-            GeoPosBoxParameter.SetSelected(0, true); //seta <none> como Geolocal padrão
+        }
+
+        private void Nova_Pesquisa_Load(object sender, EventArgs e)
+        {
+            GeoPosBoxParameter.SetSelected(0, true);        //seta <none> como Geolocal padrão
+            tweetSearchTypeParameter.SetSelected(0, true);  //seta Todos os Tweets como tipo de pesquisa padrão
+
+            //Loads the listbox language values
+            Dictionary<string, Language> langParameterSource = new Dictionary<string, Language>();
+            langParameterSource.Add("<undefined>", Language.Undefined);
+            langParameterSource.Add("Português", Language.Portuguese);
+            langParameterSource.Add("English", Language.English);
+            langParameterSource.Add("Español", Language.Spanish);
+            //Bind the source Dictionary object to Combobox
+            langParameter.DataSource = new BindingSource(langParameterSource, null);
+            langParameter.DisplayMember = "Key";
+            langParameter.ValueMember = "Value";
+            //((KeyValuePair<string, Language>)langParameter.SelectedItem).Key;   //get key of selected item in listbox   
+            //((KeyValuePair<string, Language>)langParameter.SelectedItem).Value; //get value of selected item in listbox
         }
 
         private IEnumerable<ITweet> Pesquisar()
@@ -24,19 +42,7 @@ namespace BuscaLogo
             {
                 MaximumNumberOfResults = (int)numberTweetsParameter.Value,
                 Lang = ((KeyValuePair<string, Language>)langParameter.SelectedItem).Value, //get language value of selected item in langParameter listbox
-                 /* These are all the TweetSearchParameters:
-                TweetSearchFilters Filters { get; set; }
-                IGeoCode GeoCode { get; set; }
-                Language Lang { get; set; }
-                string Locale { get; set; }
-                long MaxId { get; set; }
-                int MaximumNumberOfResults { get; set; }
-                string SearchQuery { get; set; }
-                SearchResultType SearchType { get; set; }
-                DateTime Since { get; set; }
-                long SinceId { get; set; }
-                TweetSearchType TweetSearchType { get; set; }
-                DateTime Until { get; set; } */
+                TweetSearchType = Type()    //get Tweet Search Type from selected item in tweetsearchtypeparameter listbox
             };
 
             //if the <none> geolocation isn't selected, the user wants to set a geolocation.
@@ -99,6 +105,31 @@ namespace BuscaLogo
             }
         }
 
+        private TweetSearchType Type()
+        {
+            TweetSearchType retorno;
+
+            int index = tweetSearchTypeParameter.SelectedIndex;
+            switch (index)
+            {
+                case 0:
+                    retorno = TweetSearchType.All;
+                    break;
+                case 1:
+                    retorno = TweetSearchType.OriginalTweetsOnly;
+                    break;
+                case 2:
+                    retorno = TweetSearchType.RetweetsOnly;
+                    break;
+                default:
+                    MessageBox.Show("Tipo inválido. Contate o administrador.", "ERRO 0002");
+                    retorno = TweetSearchType.All;
+                    break;
+            }
+
+            return retorno;
+        }
+
         private IEnumerable<ITweet> PesquisarTimeline(string userScreenName)
         {
             var userTimelineParameter = new UserTimelineParameters()
@@ -128,21 +159,6 @@ namespace BuscaLogo
             //PesquisarTimeline();
         }
 
-        private void Nova_Pesquisa_Load(object sender, EventArgs e)
-        {
-            //Loads the listbox language values
-            Dictionary<string, Language> langParameterSource = new Dictionary<string, Language>();
-            langParameterSource.Add("<undefined>",    Language.Undefined);
-            langParameterSource.Add("Português", Language.Portuguese);
-            langParameterSource.Add("English",   Language.English);
-            langParameterSource.Add("Español",   Language.Spanish);    
-                    
-            //Bind the source Dictionary object to Combobox
-            langParameter.DataSource = new BindingSource(langParameterSource, null);
-            langParameter.DisplayMember = "Key";
-            langParameter.ValueMember = "Value";
-            //((KeyValuePair<string, Language>)langParameter.SelectedItem).Key;   //get key of selected item in listbox   
-            //((KeyValuePair<string, Language>)langParameter.SelectedItem).Value; //get value of selected item in listbox
-        }
+
     }
 }
