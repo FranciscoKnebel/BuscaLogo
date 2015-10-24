@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.IO;
 
 using Tweetinvi;
 using Tweetinvi.Core.Enum;
@@ -39,7 +40,7 @@ namespace BuscaLogo
         private void button1_Click(object sender, EventArgs e)
         {
             listOfTweets = Pesquisar();
-            //PesquisarTimeline();
+            FileManipulation.createFile(listOfTweets);
         }
 
         private IEnumerable<ITweet> Pesquisar()
@@ -90,16 +91,18 @@ namespace BuscaLogo
                 progressBar.Step = 50;
                 progressBar.PerformStep();
 
+                int i = 0;
                 button1.Text = aux;
                 foreach (var tweet in listOfTweets)
                 {
+                    i++;
                     MessageBox.Show(String.Format("Usuário {0} (@{1}) tweetou:\n\"{2}\"\nTweet com tamanho de {3} caracters.",
                       tweet.CreatedBy, tweet.CreatedBy.ScreenName, tweet.Text, tweet.CalculateLength(false)));
                 }
                 progressBar.PerformStep();
 
 
-                MessageBox.Show("Todos tweets lidos. Retornando a lista.");
+                MessageBox.Show("Todos tweets lidos. Retornando a lista. " + i.ToString());
                 progressBar.Hide();
                 progressBar.Value = 0;
 
@@ -158,5 +161,6 @@ namespace BuscaLogo
 
             return retorno;
         }
+
     }
 }

@@ -40,16 +40,6 @@ namespace BuscaLogo
             Auth.SetApplicationOnlyCredentials("qNwYoorEWFMSckTcFHIlEUwFk", "ju9lDUhUplJ70FsbqzyJcxOOkhn3c8a5v8SN4jXQzMCmgbNjCR", true);
         }
 
-        private void Edinho()
-        {
-            Tweet.PublishTweet("Ediiiiinhoooooooo, um sorriso de criaaançaaaaa\nEdiiiinhoooooooo, sua pele uma lembrançaaaaaa");
-            Tweet.PublishTweet("Ele faz o som direeeto, Microfona as pessoooas");
-            Tweet.PublishTweet("Edinho um olhar de decisão, uma testa tão brilhooosa");
-            Tweet.PublishTweet("Quero mergulhaaar na sua boooca, Me convida pro seu mundoooo");
-            Tweet.PublishTweet("Edinho uma coisa loooucaa, quero entrar pro seeeeu muuuundooo!");
-            Tweet.PublishTweet("Ediiiinhooooo, não me deixe aqui sozinhoooooooo...Ediiiiiinhooooooooo");
-        }
-
         public Form aboutForm = new Sobre();
         private void sobreOProgramaToolStripMenuItem_Click(object sender, EventArgs e)
         {
