@@ -42,7 +42,7 @@ namespace BuscaLogo
         public static void createFile(IEnumerable<ITweet> listOfTweets)
         {
             string curDir = Directory.GetCurrentDirectory();
-            string aux = "";
+
             Arvore raiz = new Arvore();
 
             foreach(var tweet in listOfTweets)
@@ -52,7 +52,7 @@ namespace BuscaLogo
 
         private static void GetDateTime(ref string date, ref string time)
         {
-            date = DateTime.Now.ToString("yyyy-MM-dd ", System.Globalization.DateTimeFormatInfo.InvariantInfo);    //returns string of current date, year-month-day.   Ex: 2015-10-23
+            date = DateTime.Now.ToString("yyyy-MM-dd ", System.Globalization.DateTimeFormatInfo.InvariantInfo);  //returns string of current date, year-month-day.   Ex: 2015-10-23
             time = DateTime.Now.ToString("HHmmss", System.Globalization.DateTimeFormatInfo.InvariantInfo);       //returns string of current time, hourminutesecond. EX: 202318
         }
 

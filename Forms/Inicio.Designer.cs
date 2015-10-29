@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Inicio));
             this.MenuContext = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.sobreOProgramaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fecharToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.IconAreaNotif = new System.Windows.Forms.NotifyIcon(this.components);
@@ -39,7 +40,6 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.Logo = new System.Windows.Forms.PictureBox();
-            this.fecharToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuContext.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
             this.SuspendLayout();
@@ -51,7 +51,7 @@
             this.fecharToolStripMenuItem});
             this.MenuContext.Name = "contextMenuStrip1";
             this.MenuContext.ShowImageMargin = false;
-            this.MenuContext.Size = new System.Drawing.Size(154, 70);
+            this.MenuContext.Size = new System.Drawing.Size(154, 48);
             // 
             // sobreOProgramaToolStripMenuItem
             // 
@@ -60,9 +60,16 @@
             this.sobreOProgramaToolStripMenuItem.Text = "Sobre o programa...";
             this.sobreOProgramaToolStripMenuItem.Click += new System.EventHandler(this.sobreOProgramaToolStripMenuItem_Click);
             // 
+            // fecharToolStripMenuItem
+            // 
+            this.fecharToolStripMenuItem.Name = "fecharToolStripMenuItem";
+            this.fecharToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.fecharToolStripMenuItem.Text = "Fechar";
+            this.fecharToolStripMenuItem.Click += new System.EventHandler(this.fecharToolStripMenuItem_Click);
+            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(151, 226);
+            this.button1.Location = new System.Drawing.Point(232, 200);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -92,7 +99,7 @@
             // NovaPesquisa
             // 
             this.NovaPesquisa.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.NovaPesquisa.Location = new System.Drawing.Point(12, 52);
+            this.NovaPesquisa.Location = new System.Drawing.Point(12, 12);
             this.NovaPesquisa.Name = "NovaPesquisa";
             this.NovaPesquisa.Size = new System.Drawing.Size(116, 30);
             this.NovaPesquisa.TabIndex = 4;
@@ -103,7 +110,7 @@
             // button4
             // 
             this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button4.Location = new System.Drawing.Point(12, 109);
+            this.button4.Location = new System.Drawing.Point(12, 57);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(116, 30);
             this.button4.TabIndex = 5;
@@ -113,7 +120,7 @@
             // button5
             // 
             this.button5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button5.Location = new System.Drawing.Point(12, 164);
+            this.button5.Location = new System.Drawing.Point(12, 219);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(116, 30);
             this.button5.TabIndex = 6;
@@ -124,19 +131,12 @@
             // 
             this.Logo.BackColor = System.Drawing.Color.Transparent;
             this.Logo.Image = global::BuscaLogo.Properties.Resources.bird;
-            this.Logo.Location = new System.Drawing.Point(134, 52);
+            this.Logo.Location = new System.Drawing.Point(134, 12);
             this.Logo.Name = "Logo";
             this.Logo.Size = new System.Drawing.Size(173, 142);
             this.Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.Logo.TabIndex = 3;
             this.Logo.TabStop = false;
-            // 
-            // fecharToolStripMenuItem
-            // 
-            this.fecharToolStripMenuItem.Name = "fecharToolStripMenuItem";
-            this.fecharToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
-            this.fecharToolStripMenuItem.Text = "Fechar";
-            this.fecharToolStripMenuItem.Click += new System.EventHandler(this.fecharToolStripMenuItem_Click);
             // 
             // Inicio
             // 
@@ -144,7 +144,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.BackgroundImage = global::BuscaLogo.Properties.Resources.wpp3;
+            this.BackgroundImage = global::BuscaLogo.Properties.Resources.wpp2;
             this.ClientSize = new System.Drawing.Size(319, 261);
             this.ContextMenuStrip = this.MenuContext;
             this.Controls.Add(this.button5);
