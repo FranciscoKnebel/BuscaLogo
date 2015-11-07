@@ -28,10 +28,12 @@ namespace BuscaLogo
             langParameterSource.Add("Português", Language.Portuguese);
             langParameterSource.Add("English", Language.English);
             langParameterSource.Add("Español", Language.Spanish);
+
             //Bind the source Dictionary object to Combobox
             langParameter.DataSource = new BindingSource(langParameterSource, null);
             langParameter.DisplayMember = "Key";
             langParameter.ValueMember = "Value";
+
             //((KeyValuePair<string, Language>)langParameter.SelectedItem).Key;   //get key of selected item in listbox   
             //((KeyValuePair<string, Language>)langParameter.SelectedItem).Value; //get value of selected item in listbox
         }
@@ -40,7 +42,7 @@ namespace BuscaLogo
         private void button1_Click(object sender, EventArgs e)
         {
             listOfTweets = Pesquisar();
-            //FileManipulation.createFile(listOfTweets);
+            FileManipulation.createFile(listOfTweets);
         }
 
         private IEnumerable<ITweet> Pesquisar()

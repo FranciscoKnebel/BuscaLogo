@@ -15,6 +15,20 @@ using Tweetinvi.Core.Interfaces;
 
 namespace BuscaLogo
 {
+    [Serializable]
+    public struct sTweet
+    {
+        public string Text;
+        public string Name;
+        public string DisplayName;
+        public DateTime DateTime;
+        public int RetweetCount;
+        public int FavouriteCount;
+        public long Id;
+        public string IdStr;
+    };
+
+
     public partial class Inicio : Form
     {
         public Inicio()
@@ -63,80 +77,57 @@ namespace BuscaLogo
             Application.Exit();
         }
 
-        private void MostraTimeline()
-        {
-            var loggedUser = User.GetLoggedUser();
-            var pegatimeline = loggedUser.GetUserTimeline();
-
-            foreach (var tweet in pegatimeline)
-            {
-                string aux = String.Format("Usuário {0} (@{1}) postou este tweet:\n {2} \nTamanho {3}.", 
-                    tweet.CreatedBy, 
-                    tweet.CreatedBy.ScreenName, 
-                    tweet.Text, 
-                    tweet.PublishedTweetLength);
-
-                MessageBox.Show(aux);
-            }
-        }
-        private void MostraMentions()
-        {
-            var loggedUser = User.GetLoggedUser();
-            var pegatimeline = loggedUser.GetMentionsTimeline();
-
-            foreach (var tweet in pegatimeline)
-            {
-                string aux = String.Format("Usuário {0} (@{1}) postou esta menção para @{2}:\n {3} \nTamanho {4}.",
-                    tweet.CreatedBy, 
-                    tweet.CreatedBy.ScreenName, 
-                    tweet.InReplyToScreenName, 
-                    tweet.Text, 
-                    tweet.PublishedTweetLength);
-
-                MessageBox.Show(aux);
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //MostraTimeline();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //MostraMentions();     
-        }
-
         public Form newSearch;
         private void NovaPesquisa_Click(object sender, EventArgs e)
         {
-            newSearch = new Nova_Pesquisa();
-            try
+            if(newSearch != null)
             {
-                newSearch.Show();
+                newSearch = new Nova_Pesquisa();
+                try
+                {
+                    newSearch.Show();
+                }
+                catch (ObjectDisposedException)
+                {
+                    newSearch = new Nova_Pesquisa();
+                    newSearch.Show();
+                }
+                newSearch.Activate();
             }
-            catch(ObjectDisposedException)
+            else
             {
                 newSearch = new Nova_Pesquisa();
                 newSearch.Show();
-            }
-            newSearch.Activate();
+                newSearch.Activate();
+            }            
         }
 
         public Form TweetReader;
         private void TweetReaderButton_Click(object sender, EventArgs e)
         {
-            TweetReader = new Forms.Tweet_Reader();
-            try
+            if(TweetReader != null)
             {
-                TweetReader.Show();
+                if (!TweetReader.Created)
+                {
+                    TweetReader = new Forms.Tweet_Reader();
+                    try
+                    {
+                        TweetReader.Show();
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        TweetReader = new Forms.Tweet_Reader();
+                        TweetReader.Show();
+                    }
+                    TweetReader.Activate();
+                }
             }
-            catch (ObjectDisposedException)
+            else
             {
                 TweetReader = new Forms.Tweet_Reader();
                 TweetReader.Show();
+                TweetReader.Activate();
             }
-            TweetReader.Activate();
         }
     }
 }

@@ -33,8 +33,6 @@
             this.MenuContext = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.sobreOProgramaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fecharToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.IconAreaNotif = new System.Windows.Forms.NotifyIcon(this.components);
             this.NovaPesquisa = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -67,26 +65,6 @@
             this.fecharToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.fecharToolStripMenuItem.Text = "Fechar";
             this.fecharToolStripMenuItem.Click += new System.EventHandler(this.fecharToolStripMenuItem_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(232, 200);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Timeline!";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(232, 226);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Menções";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // IconAreaNotif
             // 
@@ -162,8 +140,6 @@
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.NovaPesquisa);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.Logo);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -183,8 +159,6 @@
 
         private System.Windows.Forms.ContextMenuStrip MenuContext;
         private System.Windows.Forms.ToolStripMenuItem sobreOProgramaToolStripMenuItem;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.PictureBox Logo;
         private System.Windows.Forms.NotifyIcon IconAreaNotif;
         private System.Windows.Forms.Button NovaPesquisa;

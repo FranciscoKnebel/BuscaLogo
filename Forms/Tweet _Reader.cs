@@ -8,7 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using BuscaLogo;
+using BuscaLogo.Classes;
 using Tweetinvi.Core.Interfaces;
 
 namespace BuscaLogo.Forms
@@ -16,7 +18,7 @@ namespace BuscaLogo.Forms
     public partial class Tweet_Reader : Form
     {
         IEnumerable<ITweet> Tweets;
-        ITweet[] list;
+        sTweet[] sList;
         
         public Tweet_Reader()
         {
@@ -25,8 +27,8 @@ namespace BuscaLogo.Forms
             Tweets = Nova_Pesquisa.listOfTweets;
             if (Tweets != null)
             {
-                list = Tweets.ToArray();
-                buildListBox(list.Count());
+                sList = FileManipulation.ListToSerialTweet(Tweets, Tweets.Count());
+                buildListBox(sList.Count());
             }
             else
             {
@@ -40,20 +42,11 @@ namespace BuscaLogo.Forms
 
         private void buildListBox(int contador)
         {
-            Dictionary<string, ITweet> tableSource = new Dictionary<string, ITweet>();
+            Dictionary<string, sTweet> tableSource = new Dictionary<string, sTweet>();
 
             for (int i = 0; i < contador; i++)
             {
-                /*try
-                {
-                    tableSource.Add(list[i].CreatedBy.ScreenName, list[i]);
-                }
-                catch (ArgumentException)
-                {
-                    tableSource.Add(list[i].CreatedBy.ScreenName + i.ToString(), list[i]);
-                }*/
-
-                tableSource.Add(list[i].IdStr, list[i]);
+                tableSource.Add(sList[i].IdStr, sList[i]);
             }
 
             TweetList.DataSource = new BindingSource(tableSource, null);
@@ -64,15 +57,15 @@ namespace BuscaLogo.Forms
 
         private void Tweet_ShowSelected(object sender, EventArgs e) //activates when selected index of TweetList changes
         {
-            if (list != null)
+            if (sList != null)
             {
                 int selectedIndex = TweetList.SelectedIndex;
-                ITweet aux = list[selectedIndex];
+                sTweet aux = sList[selectedIndex];
 
                 TweetTextbox.Text = aux.Text;
-                TweetName.Text = aux.CreatedBy.Name;
-                TweetDisplayName.Text = "@" + aux.CreatedBy.ScreenName;
-                TweetDateTime.Text = aux.CreatedAt.ToString();
+                TweetName.Text = aux.Name;
+                TweetDisplayName.Text = "@" + aux.DisplayName;
+                TweetDateTime.Text = aux.DateTime.ToString();
                 TweetRetweets.Text = aux.RetweetCount.ToString();
                 TweetFavourites.Text = aux.FavouriteCount.ToString();
             }
@@ -81,10 +74,11 @@ namespace BuscaLogo.Forms
         private void TweetRefresh_Click(object sender, EventArgs e)
         {
             Tweets = Nova_Pesquisa.listOfTweets;
+            sList = FileManipulation.ListToSerialTweet(Tweets, Tweets.Count());
+
             if (Tweets != null)
             {
-                list = Tweets.ToArray();
-                buildListBox(list.Count());
+                buildListBox(sList.Count());
             }
         }
     }
