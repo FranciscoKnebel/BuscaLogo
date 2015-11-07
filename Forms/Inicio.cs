@@ -60,7 +60,7 @@ namespace BuscaLogo
         }
         private void fecharToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Dispose();
+            Application.Exit();
         }
 
         private void MostraTimeline()
@@ -107,9 +107,10 @@ namespace BuscaLogo
             //MostraMentions();     
         }
 
-        public Form newSearch = new Nova_Pesquisa();
+        public Form newSearch;
         private void NovaPesquisa_Click(object sender, EventArgs e)
         {
+            newSearch = new Nova_Pesquisa();
             try
             {
                 newSearch.Show();
@@ -122,6 +123,20 @@ namespace BuscaLogo
             newSearch.Activate();
         }
 
-
+        public Form TweetReader;
+        private void TweetReaderButton_Click(object sender, EventArgs e)
+        {
+            TweetReader = new Forms.Tweet_Reader();
+            try
+            {
+                TweetReader.Show();
+            }
+            catch (ObjectDisposedException)
+            {
+                TweetReader = new Forms.Tweet_Reader();
+                TweetReader.Show();
+            }
+            TweetReader.Activate();
+        }
     }
 }

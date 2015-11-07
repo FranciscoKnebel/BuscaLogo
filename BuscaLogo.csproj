@@ -72,7 +72,7 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\bird75.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\bird.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup>
@@ -161,6 +161,12 @@
     <Compile Include="Classes\ArvoreBinaria.cs" />
     <Compile Include="Classes\AutoPost.cs" />
     <Compile Include="Classes\FileManipulation.cs" />
+    <Compile Include="Forms\Tweet _Reader.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Tweet _Reader.Designer.cs">
+      <DependentUpon>Tweet _Reader.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Nova_Pesquisa.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -190,6 +196,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Tweet _Reader.resx">
+      <DependentUpon>Tweet _Reader.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -229,12 +238,16 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\birdQ.ico" />
+    <Content Include="Resources\birdQ.png" />
+    <Content Include="Resources\like-action-on.png" />
+    <Content Include="Resources\retweet-action-on.png" />
     <Content Include="Resources\wpp.png" />
     <Content Include="Resources\wpp2.png" />
     <Content Include="Resources\wpp3.png" />
     <Content Include="Resources\wpp4.png" />
     <None Include="Resources\bird.png" />
-    <Content Include="Resources\bird75.ico" />
+    <Content Include="Resources\bird.ico" />
     <Content Include="Resources\dom_casmurro.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

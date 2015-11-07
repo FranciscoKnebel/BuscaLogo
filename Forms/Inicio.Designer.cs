@@ -40,6 +40,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.Logo = new System.Windows.Forms.PictureBox();
+            this.TweetReaderButton = new System.Windows.Forms.Button();
             this.MenuContext.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
             this.SuspendLayout();
@@ -110,7 +111,7 @@
             // button4
             // 
             this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button4.Location = new System.Drawing.Point(12, 57);
+            this.button4.Location = new System.Drawing.Point(12, 48);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(116, 30);
             this.button4.TabIndex = 5;
@@ -138,6 +139,16 @@
             this.Logo.TabIndex = 3;
             this.Logo.TabStop = false;
             // 
+            // TweetReaderButton
+            // 
+            this.TweetReaderButton.Location = new System.Drawing.Point(12, 124);
+            this.TweetReaderButton.Name = "TweetReaderButton";
+            this.TweetReaderButton.Size = new System.Drawing.Size(116, 30);
+            this.TweetReaderButton.TabIndex = 7;
+            this.TweetReaderButton.Text = "Leitor de Tweet";
+            this.TweetReaderButton.UseVisualStyleBackColor = true;
+            this.TweetReaderButton.Click += new System.EventHandler(this.TweetReaderButton_Click);
+            // 
             // Inicio
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
@@ -147,6 +158,7 @@
             this.BackgroundImage = global::BuscaLogo.Properties.Resources.wpp2;
             this.ClientSize = new System.Drawing.Size(319, 261);
             this.ContextMenuStrip = this.MenuContext;
+            this.Controls.Add(this.TweetReaderButton);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.NovaPesquisa);
@@ -179,6 +191,7 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.ToolStripMenuItem fecharToolStripMenuItem;
+        private System.Windows.Forms.Button TweetReaderButton;
     }
 }
 

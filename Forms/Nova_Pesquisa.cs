@@ -40,7 +40,7 @@ namespace BuscaLogo
         private void button1_Click(object sender, EventArgs e)
         {
             listOfTweets = Pesquisar();
-            FileManipulation.createFile(listOfTweets);
+            //FileManipulation.createFile(listOfTweets);
         }
 
         private IEnumerable<ITweet> Pesquisar()
@@ -96,13 +96,13 @@ namespace BuscaLogo
                 foreach (var tweet in listOfTweets)
                 {
                     i++;
-                    MessageBox.Show(String.Format("Usuário {0} (@{1}) tweetou:\n\"{2}\"\nTweet com tamanho de {3} caracters.",
-                      tweet.CreatedBy, tweet.CreatedBy.ScreenName, tweet.Text, tweet.CalculateLength(false)));
+                    //MessageBox.Show(String.Format("Usuário {0} (@{1}) tweetou:\n\"{2}\"\nTweet com tamanho de {3} caracters.",
+                    //  tweet.CreatedBy, tweet.CreatedBy.ScreenName, tweet.Text, tweet.CalculateLength(false)));
                 }
                 progressBar.PerformStep();
 
 
-                MessageBox.Show("Todos tweets lidos. Retornando a lista. " + i.ToString());
+                MessageBox.Show("Todos tweets lidos. Retornando a lista com " + i.ToString() + " elementos.");
                 progressBar.Hide();
                 progressBar.Value = 0;
 

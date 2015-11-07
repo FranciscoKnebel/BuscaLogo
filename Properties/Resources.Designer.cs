@@ -71,6 +71,36 @@ namespace BuscaLogo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon bird1 {
+            get {
+                object obj = ResourceManager.GetObject("bird1", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap birdQ {
+            get {
+                object obj = ResourceManager.GetObject("birdQ", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon birdQ1 {
+            get {
+                object obj = ResourceManager.GetObject("birdQ1", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dom Casmurro
         ///CAPÍTULO I
         ///    Uma noite destas, vindo da cidade para o Engenho Novo, encontrei no trem da Central um rapaz aqui do bairro, que eu conheço de vista e de chapéu. Cumprimentou-me, sentou-se ao pé de mim, falou da lua e dos ministros, e acabou recitando-me versos. A viagem era curta, e os versos pode ser que não fossem inteiramente maus. Sucedeu, porém, que, como eu estava cansado, fechei os olhos três ou quatro vezes; tanto bastou para que ele interrompesse a leitura e metesse os versos no bols [rest of string was truncated]&quot;;.
@@ -78,6 +108,26 @@ namespace BuscaLogo.Properties {
         internal static string dom_casmurro {
             get {
                 return ResourceManager.GetString("dom_casmurro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap like_action_on {
+            get {
+                object obj = ResourceManager.GetObject("like_action_on", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap retweet_action_on {
+            get {
+                object obj = ResourceManager.GetObject("retweet_action_on", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
