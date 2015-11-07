@@ -51,7 +51,7 @@
             this.TweetTextbox.Location = new System.Drawing.Point(12, 57);
             this.TweetTextbox.Name = "TweetTextbox";
             this.TweetTextbox.ReadOnly = true;
-            this.TweetTextbox.Size = new System.Drawing.Size(288, 194);
+            this.TweetTextbox.Size = new System.Drawing.Size(288, 169);
             this.TweetTextbox.TabIndex = 0;
             this.TweetTextbox.Text = "";
             // 
@@ -75,7 +75,7 @@
             // TweetDateTime
             // 
             this.TweetDateTime.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.TweetDateTime.Location = new System.Drawing.Point(150, 262);
+            this.TweetDateTime.Location = new System.Drawing.Point(150, 236);
             this.TweetDateTime.Name = "TweetDateTime";
             this.TweetDateTime.Size = new System.Drawing.Size(150, 13);
             this.TweetDateTime.TabIndex = 3;
@@ -93,7 +93,7 @@
             // 
             // TweetRefresh
             // 
-            this.TweetRefresh.Location = new System.Drawing.Point(118, 399);
+            this.TweetRefresh.Location = new System.Drawing.Point(183, 252);
             this.TweetRefresh.Name = "TweetRefresh";
             this.TweetRefresh.Size = new System.Drawing.Size(75, 23);
             this.TweetRefresh.TabIndex = 5;
@@ -140,7 +140,7 @@
             // imageFV
             // 
             this.imageFV.Image = global::BuscaLogo.Properties.Resources.like_action_on;
-            this.imageFV.Location = new System.Drawing.Point(12, 285);
+            this.imageFV.Location = new System.Drawing.Point(12, 229);
             this.imageFV.Name = "imageFV";
             this.imageFV.Size = new System.Drawing.Size(24, 24);
             this.imageFV.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -159,7 +159,7 @@
             // TweetFavourites
             // 
             this.TweetFavourites.AutoSize = true;
-            this.TweetFavourites.Location = new System.Drawing.Point(42, 291);
+            this.TweetFavourites.Location = new System.Drawing.Point(42, 236);
             this.TweetFavourites.Name = "TweetFavourites";
             this.TweetFavourites.Size = new System.Drawing.Size(86, 13);
             this.TweetFavourites.TabIndex = 12;
