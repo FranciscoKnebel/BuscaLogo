@@ -44,8 +44,6 @@ namespace BuscaLogo
                 newFile.Close();
             }
             
-            
-
             Directory.SetCurrentDirectory(startDir);
             return currentDir + filePath;
         }

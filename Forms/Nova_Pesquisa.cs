@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using System.IO;
 
 using Tweetinvi;
 using Tweetinvi.Core.Enum;
 using Tweetinvi.Core.Interfaces;
 using Tweetinvi.Core.Parameters;
+using System.Linq;
 
 namespace BuscaLogo
 {
@@ -93,14 +93,8 @@ namespace BuscaLogo
                 progressBar.Step = 50;
                 progressBar.PerformStep();
 
-                int i = 0;
+                int i = listOfTweets.Count();
                 button1.Text = aux;
-                foreach (var tweet in listOfTweets)
-                {
-                    i++;
-                    //MessageBox.Show(String.Format("Usuário {0} (@{1}) tweetou:\n\"{2}\"\nTweet com tamanho de {3} caracters.",
-                    //  tweet.CreatedBy, tweet.CreatedBy.ScreenName, tweet.Text, tweet.CalculateLength(false)));
-                }
                 progressBar.PerformStep();
 
 

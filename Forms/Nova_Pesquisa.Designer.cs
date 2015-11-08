@@ -250,6 +250,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Nova_Pesquisa";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Nova Pesquisa";
             this.Load += new System.EventHandler(this.Nova_Pesquisa_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numberTweetsParameter)).EndInit();

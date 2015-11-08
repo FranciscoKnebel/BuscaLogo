@@ -19,7 +19,7 @@ namespace BuscaLogo.Forms
     {
         IEnumerable<ITweet> Tweets;
         sTweet[] sList;
-        
+
         public Tweet_Reader()
         {
             InitializeComponent();

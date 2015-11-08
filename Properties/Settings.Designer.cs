@@ -22,5 +22,23 @@ namespace BuscaLogo.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("qNwYoorEWFMSckTcFHIlEUwFk")]
+        public string consumerKey {
+            get {
+                return ((string)(this["consumerKey"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ju9lDUhUplJ70FsbqzyJcxOOkhn3c8a5v8SN4jXQzMCmgbNjCR")]
+        public string consumerSecret {
+            get {
+                return ((string)(this["consumerSecret"]));
+            }
+        }
     }
 }

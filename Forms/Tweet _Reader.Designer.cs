@@ -184,6 +184,7 @@
             this.Controls.Add(this.BackgroundNull);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Tweet_Reader";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Leitor de Tweet";
             ((System.ComponentModel.ISupportInitialize)(this.BackgroundNull)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageRT)).EndInit();

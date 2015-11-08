@@ -28,18 +28,11 @@ namespace BuscaLogo
         public string IdStr;
     };
 
-
     public partial class Inicio : Form
     {
         public Inicio()
         {
             InitializeComponent();
-
-            //TextReader leitor = File.OpenText(@"A:\Documentos\Dropbox\Code\C#\BuscaLogo\BuscaLogo\dom_casmurro.txt");
-
-            //var loggedUser = User.GetLoggedUser();
-            //AutoPost.Executa(loggedUser, leitor);
-            //splitText.Texto(leitor, "dom_casmurro");
         }
 
         private void Inicio_Load(object sender, EventArgs e)
@@ -51,55 +44,37 @@ namespace BuscaLogo
         {
             // Set up your credentials (https://apps.twitter.com)
             // These are application-only credentials, so you can't tweet.
-            Auth.SetApplicationOnlyCredentials("qNwYoorEWFMSckTcFHIlEUwFk", "ju9lDUhUplJ70FsbqzyJcxOOkhn3c8a5v8SN4jXQzMCmgbNjCR", true);
+            Auth.SetApplicationOnlyCredentials(Properties.Settings.Default.consumerKey, Properties.Settings.Default.consumerSecret, true);
         }
-
-        public Form aboutForm = new Sobre();
-        private void sobreOProgramaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                aboutForm.Show();
-            }
-            catch (ObjectDisposedException)
-            {
-                aboutForm = new Sobre();
-                aboutForm.Show();
-            }
-            aboutForm.Activate();
-        }
-        private void IconAreaNotif_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            Activate();
-        }
-        private void fecharToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
+        
         public Form newSearch;
         private void NovaPesquisa_Click(object sender, EventArgs e)
         {
             if(newSearch != null)
             {
-                newSearch = new Nova_Pesquisa();
-                try
-                {
-                    newSearch.Show();
-                }
-                catch (ObjectDisposedException)
+                if(!newSearch.Created)
                 {
                     newSearch = new Nova_Pesquisa();
-                    newSearch.Show();
+                    try
+                    {
+                        newSearch.Show();
+                    }
+                    catch(ObjectDisposedException)
+                    {
+                        newSearch = new Nova_Pesquisa();
+                        newSearch.Show();
+                    }
+                    newSearch.Activate();
                 }
-                newSearch.Activate();
             }
             else
             {
                 newSearch = new Nova_Pesquisa();
                 newSearch.Show();
                 newSearch.Activate();
-            }            
+            }
+
+            newSearch.Location = new Point(315, newSearch.Location.Y);
         }
 
         public Form TweetReader;
@@ -128,6 +103,53 @@ namespace BuscaLogo
                 TweetReader.Show();
                 TweetReader.Activate();
             }
+
+            TweetReader.Location = new Point(1125, TweetReader.Location.Y);
+        }
+
+        public Form aboutForm;
+        private void sobreOProgramaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(aboutForm != null)
+            {
+                if(!aboutForm.Created)
+                {
+                    aboutForm = new Sobre();
+                    try
+                    {
+                        aboutForm.Show();
+                    }
+                    catch(ObjectDisposedException)
+                    {
+                        aboutForm = new Sobre();
+                        aboutForm.Show();
+                    }
+                    aboutForm.Activate();
+                }
+            }
+            else
+            {
+                aboutForm = new Sobre();
+                aboutForm.Show();
+                aboutForm.Activate();
+            }
+            aboutForm.Location = new Point(aboutForm.Location.X, 120);
+        }
+
+        private void IconAreaNotif_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Activate();
+        }
+        private void fecharToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IconAreaNotif.Visible = false;
+            Application.Exit();
+        }
+
+        private void Inicio_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            IconAreaNotif.Visible = false;
+            Application.Exit();
         }
     }
 }
