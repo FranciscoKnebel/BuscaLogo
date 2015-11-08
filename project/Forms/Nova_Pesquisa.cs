@@ -41,8 +41,11 @@ namespace BuscaLogo
         public static IEnumerable<ITweet> listOfTweets;
         private void button1_Click(object sender, EventArgs e)
         {
+            string pathfile;
             listOfTweets = Pesquisar();
-            string pathfile = FileManipulation.createBinFile(listOfTweets);
+
+            if(listOfTweets != null)
+                pathfile = FileManipulation.createBinFile(listOfTweets);
         }
 
         private IEnumerable<ITweet> Pesquisar()
@@ -50,11 +53,11 @@ namespace BuscaLogo
             // Creates the search parameter for the search function.
             var searchParameter = new TweetSearchParameters(searchTextParameter.Text)
             {
-                MaximumNumberOfResults = (int)numberTweetsParameter.Value,
-                Lang = ((KeyValuePair<string, Language>)langParameter.SelectedItem).Value, //get language value of selected item in langParameter listbox
-                TweetSearchType = Type()    //get Tweet Search Type from selected item in tweetsearchtypeparameter listbox
-            };
-
+                MaximumNumberOfResults = (int) numberTweetsParameter.Value,
+                Lang = ((KeyValuePair<string, Language>) langParameter.SelectedItem).Value, //get language value of selected item in langParameter listbox
+                TweetSearchType = Type(),    //get Tweet Search Type from selected item in tweetsearchtypeparameter listbox
+            };           
+            
             //if the <none> geolocation isn't selected, the user wants to set a geolocation.
             //Searches through index of listbox and finds which option the user choose.
             int indexGeoPosParameter = GeoPosBoxParameter.SelectedIndex;
@@ -156,6 +159,16 @@ namespace BuscaLogo
             }
 
             return retorno;
+        }
+
+        private void Trending()
+        {
+            var trendingTopics = Trends.GetTrendsAt(455823); //trending em Porto Alegre. 455823 é o WOEID da cidade.
+
+            foreach(var trend in trendingTopics.Trends)
+            {
+                var tweets = Search.SearchTweets(trend.Name);
+            }
         }
 
     }

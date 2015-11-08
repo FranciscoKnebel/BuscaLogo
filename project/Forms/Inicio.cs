@@ -64,8 +64,8 @@ namespace BuscaLogo
                         newSearch = new Nova_Pesquisa();
                         newSearch.Show();
                     }
-                    newSearch.Activate();
                 }
+                newSearch.Activate();
             }
             else
             {
@@ -124,8 +124,8 @@ namespace BuscaLogo
                         aboutForm = new Sobre();
                         aboutForm.Show();
                     }
-                    aboutForm.Activate();
                 }
+                aboutForm.Activate();
             }
             else
             {
@@ -150,6 +150,11 @@ namespace BuscaLogo
         {
             IconAreaNotif.Visible = false;
             Application.Exit();
+        }
+
+        private void Carregar_Click(object sender, EventArgs e)
+        {
+            string fileName = FileManipulation.getFileToRead();
         }
     }
 }

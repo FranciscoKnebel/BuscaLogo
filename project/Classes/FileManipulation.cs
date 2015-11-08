@@ -57,6 +57,29 @@ namespace BuscaLogo
 
             return tweetArray;
         }
+
+        public static string getFileToRead()
+        {
+            string currentDir = Directory.GetCurrentDirectory() + @"\Searches\";
+            string strFileName = String.Empty;
+
+            if(!Directory.Exists(currentDir))
+                Directory.CreateDirectory(currentDir);
+
+            OpenFileDialog newfileDialog = new OpenFileDialog();
+            newfileDialog.Filter = "bin files (*.bin)|*.bin"; //|All files (*.*)|*.*";
+            newfileDialog.RestoreDirectory = true;
+            newfileDialog.Title = "Carregar";
+            newfileDialog.InitialDirectory = currentDir;
+
+            if(newfileDialog.ShowDialog() == DialogResult.OK)
+                strFileName = newfileDialog.FileName;
+            
+            if(strFileName == String.Empty)
+                return String.Empty;    //user didn't select a file to open
+            else
+                return strFileName;     //returns filepath of chosen file
+        }
         
         public static sTweet[] ListToSerialTweet(IEnumerable<ITweet> listOfTweets, int TweetsInList)
         {

@@ -35,7 +35,7 @@
             this.fecharToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.IconAreaNotif = new System.Windows.Forms.NotifyIcon(this.components);
             this.NovaPesquisa = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.Carregar = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.Logo = new System.Windows.Forms.PictureBox();
             this.TweetReaderButton = new System.Windows.Forms.Button();
@@ -86,15 +86,16 @@
             this.NovaPesquisa.UseVisualStyleBackColor = true;
             this.NovaPesquisa.Click += new System.EventHandler(this.NovaPesquisa_Click);
             // 
-            // button4
+            // Carregar
             // 
-            this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button4.Location = new System.Drawing.Point(249, 183);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(58, 30);
-            this.button4.TabIndex = 5;
-            this.button4.Text = "Carregar";
-            this.button4.UseVisualStyleBackColor = true;
+            this.Carregar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Carregar.Location = new System.Drawing.Point(249, 183);
+            this.Carregar.Name = "Carregar";
+            this.Carregar.Size = new System.Drawing.Size(58, 30);
+            this.Carregar.TabIndex = 5;
+            this.Carregar.Text = "Carregar";
+            this.Carregar.UseVisualStyleBackColor = true;
+            this.Carregar.Click += new System.EventHandler(this.Carregar_Click);
             // 
             // button5
             // 
@@ -138,7 +139,7 @@
             this.ContextMenuStrip = this.MenuContext;
             this.Controls.Add(this.TweetReaderButton);
             this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.Carregar);
             this.Controls.Add(this.NovaPesquisa);
             this.Controls.Add(this.Logo);
             this.DoubleBuffered = true;
@@ -163,7 +164,7 @@
         private System.Windows.Forms.PictureBox Logo;
         private System.Windows.Forms.NotifyIcon IconAreaNotif;
         private System.Windows.Forms.Button NovaPesquisa;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button Carregar;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.ToolStripMenuItem fecharToolStripMenuItem;
         private System.Windows.Forms.Button TweetReaderButton;

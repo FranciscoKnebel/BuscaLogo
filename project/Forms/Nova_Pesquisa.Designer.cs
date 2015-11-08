@@ -83,7 +83,7 @@
             // 
             this.numberTweetsParameter.Location = new System.Drawing.Point(108, 61);
             this.numberTweetsParameter.Maximum = new decimal(new int[] {
-            9999,
+            2147483647,
             0,
             0,
             0});
@@ -93,7 +93,7 @@
             0,
             0});
             this.numberTweetsParameter.Name = "numberTweetsParameter";
-            this.numberTweetsParameter.Size = new System.Drawing.Size(56, 20);
+            this.numberTweetsParameter.Size = new System.Drawing.Size(87, 20);
             this.numberTweetsParameter.TabIndex = 4;
             this.numberTweetsParameter.Value = new decimal(new int[] {
             10,
