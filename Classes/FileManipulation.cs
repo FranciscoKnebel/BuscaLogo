@@ -15,11 +15,12 @@ namespace BuscaLogo
 {
     class FileManipulation
     {
-        public static void createFile(IEnumerable<ITweet> listOfTweets)
+        public static string createBinFile(IEnumerable<ITweet> listOfTweets)
         {
             string date = "", time = "";
             string startDir = Directory.GetCurrentDirectory();
-            string currentDir = startDir + @"\Data\" + date;
+            string currentDir = startDir + @"\Searches\" + date;
+            string filePath = "";
 
             GetDateTime(ref date, ref time);
             if(!Directory.Exists(currentDir))
@@ -27,7 +28,6 @@ namespace BuscaLogo
             Directory.SetCurrentDirectory(currentDir);
 
             sTweet[] tweetArray = ListToSerialTweet(listOfTweets, listOfTweets.Count());
-            
             BinaryFormatter bf = new BinaryFormatter();
             byte[] buffer;
             using (var ms = new MemoryStream())
@@ -36,13 +36,28 @@ namespace BuscaLogo
                 buffer = ms.ToArray();
             }
 
-            Random a = new Random();
-            BinaryWriter newFile = new BinaryWriter(File.Open(date + a.Next().ToString() + ".bin", FileMode.CreateNew));
+            filePath = String.Format("{0}_{1}.bin", date, time);
 
-            newFile.Write(buffer, 0, buffer.Length);
-            newFile.Close();
+            using (BinaryWriter newFile = new BinaryWriter(File.Open(filePath, FileMode.CreateNew)))
+            {
+                newFile.Write(buffer, 0, buffer.Length);
+                newFile.Close();
+            }
+            
+            
 
             Directory.SetCurrentDirectory(startDir);
+            return currentDir + filePath;
+        }
+
+        public static sTweet[] readBinFile(string path)
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            System.IO.Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+            sTweet[] tweetArray = (sTweet[])formatter.Deserialize(stream);
+            stream.Close();
+
+            return tweetArray;
         }
         
         public static sTweet[] ListToSerialTweet(IEnumerable<ITweet> listOfTweets, int TweetsInList)
@@ -69,7 +84,7 @@ namespace BuscaLogo
         private static void GetDateTime(ref string date, ref string time)
         {
             date = DateTime.Now.ToString("yyyy-MM-dd", System.Globalization.DateTimeFormatInfo.InvariantInfo);  //returns string of current date, year-month-day.   Ex: 2015-10-23
-            time = DateTime.Now.ToString("HHmmss", System.Globalization.DateTimeFormatInfo.InvariantInfo);       //returns string of current time, hourminutesecond. EX: 202318
+            time = DateTime.Now.ToString("HH-mm-ss", System.Globalization.DateTimeFormatInfo.InvariantInfo);      //returns string of current time, hourminutesecond. EX: 202318
         }
 
         private static void AddText(FileStream fs, string value)

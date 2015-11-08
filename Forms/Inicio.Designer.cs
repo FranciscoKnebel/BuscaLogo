@@ -89,9 +89,9 @@
             // button4
             // 
             this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button4.Location = new System.Drawing.Point(12, 48);
+            this.button4.Location = new System.Drawing.Point(249, 183);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(116, 30);
+            this.button4.Size = new System.Drawing.Size(58, 30);
             this.button4.TabIndex = 5;
             this.button4.Text = "Carregar";
             this.button4.UseVisualStyleBackColor = true;
@@ -99,9 +99,9 @@
             // button5
             // 
             this.button5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button5.Location = new System.Drawing.Point(12, 219);
+            this.button5.Location = new System.Drawing.Point(249, 219);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(116, 30);
+            this.button5.Size = new System.Drawing.Size(58, 30);
             this.button5.TabIndex = 6;
             this.button5.Text = "Deletar";
             this.button5.UseVisualStyleBackColor = true;
@@ -110,16 +110,16 @@
             // 
             this.Logo.BackColor = System.Drawing.Color.Transparent;
             this.Logo.Image = global::BuscaLogo.Properties.Resources.bird;
-            this.Logo.Location = new System.Drawing.Point(134, 12);
+            this.Logo.Location = new System.Drawing.Point(12, 38);
             this.Logo.Name = "Logo";
-            this.Logo.Size = new System.Drawing.Size(173, 142);
+            this.Logo.Size = new System.Drawing.Size(254, 214);
             this.Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.Logo.TabIndex = 3;
             this.Logo.TabStop = false;
             // 
             // TweetReaderButton
             // 
-            this.TweetReaderButton.Location = new System.Drawing.Point(12, 124);
+            this.TweetReaderButton.Location = new System.Drawing.Point(191, 12);
             this.TweetReaderButton.Name = "TweetReaderButton";
             this.TweetReaderButton.Size = new System.Drawing.Size(116, 30);
             this.TweetReaderButton.TabIndex = 7;

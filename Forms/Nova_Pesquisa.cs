@@ -42,7 +42,7 @@ namespace BuscaLogo
         private void button1_Click(object sender, EventArgs e)
         {
             listOfTweets = Pesquisar();
-            FileManipulation.createFile(listOfTweets);
+            string pathfile = FileManipulation.createBinFile(listOfTweets);
         }
 
         private IEnumerable<ITweet> Pesquisar()
