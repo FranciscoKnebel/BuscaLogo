@@ -251,6 +251,12 @@
     <Content Include="Resources\bird.ico" />
     <Content Include="Resources\dom_casmurro.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\btree-dotnet\BTree.csproj">
+      <Project>{031678e5-2ad7-4426-8a9c-6a7e269f47c8}</Project>
+      <Name>BTree</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
