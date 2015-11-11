@@ -121,7 +121,9 @@
             "Campus do Vale",
             "Hospital de Clínicas",
             "Aeroporto Salgado Filho",
-            "Mercado Público"});
+            "Mercado Público",
+            "Cristo Redentor",
+            "Aeropuerto Tegucigalpa"});
             this.GeoPosBoxParameter.Location = new System.Drawing.Point(311, 34);
             this.GeoPosBoxParameter.Name = "GeoPosBoxParameter";
             this.GeoPosBoxParameter.Size = new System.Drawing.Size(141, 186);

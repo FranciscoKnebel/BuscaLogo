@@ -78,6 +78,12 @@ namespace BuscaLogo
                 case 5: //Mercado Público
                     searchParameter.GeoCode = new GeoCode(-51.2278460, -30.0275120, (double)radiusParameter.Value, DistanceMeasure.Kilometers);
                     break;
+                case 6: //Cristo Redentor
+                    searchParameter.GeoCode = new GeoCode(-43.2104845, -22.9519098, (double) radiusParameter.Value, DistanceMeasure.Kilometers);
+                    break;
+                case 7: //Aeropuerto Tegucigalpa
+                    searchParameter.GeoCode = new GeoCode(-87.2170801, 14.0608254, (double) radiusParameter.Value, DistanceMeasure.Kilometers);
+                    break;
                 default: //Geolocale not defined
                     break;
             }

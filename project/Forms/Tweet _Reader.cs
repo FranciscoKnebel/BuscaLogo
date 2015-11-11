@@ -17,18 +17,20 @@ namespace BuscaLogo.Forms
 {
     public partial class Tweet_Reader : Form
     {
-        IEnumerable<ITweet> Tweets;
         sTweet[] sList;
 
         public Tweet_Reader()
         {
             InitializeComponent();
 
-            Tweets = Nova_Pesquisa.listOfTweets;
-            if (Tweets != null)
+            string ReadFile = BuscaLogo.Inicio.OpenFileName;
+
+            if(ReadFile != String.Empty)
             {
-                sList = FileManipulation.ListToSerialTweet(Tweets, Tweets.Count());
-                buildListBox(sList.Count());
+                sList = FileManipulation.readBinFile(ReadFile);
+                
+                if(sList != null)
+                    buildListBox(sList.Count());
             }
             else
             {
@@ -60,24 +62,41 @@ namespace BuscaLogo.Forms
             if (sList != null)
             {
                 int selectedIndex = TweetList.SelectedIndex;
-                sTweet aux = sList[selectedIndex];
+                sTweet aux = new sTweet();
+                bool Invalid = false;
 
-                TweetTextbox.Text = aux.Text;
-                TweetName.Text = aux.Name;
-                TweetDisplayName.Text = "@" + aux.DisplayName;
-                TweetDateTime.Text = aux.DateTime.ToString();
-                TweetRetweets.Text = aux.RetweetCount.ToString();
-                TweetFavourites.Text = aux.FavouriteCount.ToString();
+                try
+                {
+                    aux = sList[selectedIndex];
+                }
+                catch(IndexOutOfRangeException) //cairá aqui se lista não conter elementos
+                {
+                    Invalid = true;
+                }
+                finally
+                {
+                    if(!Invalid)
+                    {
+                        TweetTextbox.Text = aux.Text;
+                        TweetName.Text = aux.Name;
+                        TweetDisplayName.Text = "@" + aux.DisplayName;
+                        TweetDateTime.Text = aux.DateTime.ToString();
+                        TweetRetweets.Text = aux.RetweetCount.ToString();
+                        TweetFavourites.Text = aux.FavouriteCount.ToString();
+                    }
+                    else
+                        TweetTextbox.Text = "Arquivo inválido. Tem certeza que escolheu o certo? - ERRO 003";
+                }
             }
         }
 
         private void TweetRefresh_Click(object sender, EventArgs e)
         {
-            Tweets = Nova_Pesquisa.listOfTweets;
-            sList = FileManipulation.ListToSerialTweet(Tweets, Tweets.Count());
+            string ReadFile = BuscaLogo.Inicio.OpenFileName;
 
-            if (Tweets != null)
+            if(ReadFile != String.Empty)
             {
+                sList = FileManipulation.readBinFile(ReadFile);
                 buildListBox(sList.Count());
             }
         }

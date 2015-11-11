@@ -152,9 +152,10 @@ namespace BuscaLogo
             Application.Exit();
         }
 
+        public static string OpenFileName = String.Empty;
         private void Carregar_Click(object sender, EventArgs e)
         {
-            string fileName = FileManipulation.getFileToRead();
+            OpenFileName = FileManipulation.getFileToRead();
         }
     }
 }
