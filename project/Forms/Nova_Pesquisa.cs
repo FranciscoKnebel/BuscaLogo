@@ -38,17 +38,17 @@ namespace BuscaLogo
             //((KeyValuePair<string, Language>)langParameter.SelectedItem).Value; //get value of selected item in listbox
         }
 
-        public static IEnumerable<ITweet> listOfTweets;
+        public static IEnumerable<sTweet> listOfTweets;
         private void button1_Click(object sender, EventArgs e)
         {
-            string pathfile;
+            //string pathfile = "";
             listOfTweets = Pesquisar();
 
-            if(listOfTweets != null)
-                pathfile = FileManipulation.createBinFile(listOfTweets);
+            //if(listOfTweets != null) ;
+                //pathfile = FileManipulation.createBinArray(listOfTweets, searchParameters);
         }
 
-        private IEnumerable<ITweet> Pesquisar()
+        private IEnumerable<sTweet> Pesquisar()
         {
             // Creates the search parameter for the search function.
             var searchParameter = new TweetSearchParameters(searchTextParameter.Text)
@@ -91,24 +91,30 @@ namespace BuscaLogo
             return Pesquisar(searchParameter);
         }
 
-        private IEnumerable<ITweet> Pesquisar(TweetSearchParameters searchParameter)
+        private IEnumerable<sTweet> Pesquisar(TweetSearchParameters searchParameter)
         {
             string aux = button1.Text;
             if ((searchParameter.SearchQuery != "") || (searchParameter.GeoCode != null)) //usuário passou parâmetros
             {
                 progressBar.Show();
                 button1.Text = "Searching, please wait...";
-                listOfTweets = Search.SearchTweets(searchParameter);
-                progressBar.Step = 50;
+                IEnumerable<ITweet> list = Search.SearchTweets(searchParameter);
+                progressBar.Step = 25;
                 progressBar.PerformStep();
 
-                int i = listOfTweets.Count();
+                sTweet[] tweetArray = FileManipulation.ListToSerialTweet(list, list.Count(), searchParameter);
+                progressBar.PerformStep();
+
+                BTree.BTree<int, sTweet> Tree = FileManipulation.SerialITweetToBTree(tweetArray);
+                progressBar.PerformStep();
+
+                FileManipulation.createBinTreeFile(Tree);
+                progressBar.PerformStep();
+
+                int i = list.Count();
                 button1.Text = aux;
-                progressBar.PerformStep();
-
 
                 MessageBox.Show("Todos tweets lidos. Retornando a lista com " + i.ToString() + " elementos.");
-                progressBar.Hide();
                 progressBar.Value = 0;
 
                 return listOfTweets;

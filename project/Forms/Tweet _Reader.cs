@@ -27,7 +27,7 @@ namespace BuscaLogo.Forms
 
             if(ReadFile != String.Empty)
             {
-                sList = FileManipulation.readBinFile(ReadFile);
+                sList = FileManipulation.readBinArrayFile(ReadFile);
                 
                 if(sList != null)
                     buildListBox(sList.Count());
@@ -96,7 +96,7 @@ namespace BuscaLogo.Forms
 
             if(ReadFile != String.Empty)
             {
-                sList = FileManipulation.readBinFile(ReadFile);
+                sList = FileManipulation.readBinArrayFile(ReadFile);
                 buildListBox(sList.Count());
             }
         }

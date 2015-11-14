@@ -10,24 +10,9 @@ using System.Windows.Forms;
 using System.IO;
 
 using Tweetinvi;
-using Tweetinvi.Core.Credentials;
-using Tweetinvi.Core.Interfaces;
 
 namespace BuscaLogo
 {
-    [Serializable]
-    public struct sTweet
-    {
-        public string Text;
-        public string Name;
-        public string DisplayName;
-        public DateTime DateTime;
-        public int RetweetCount;
-        public int FavouriteCount;
-        public long Id;
-        public string IdStr;
-    };
-
     public partial class Inicio : Form
     {
         public Inicio()
@@ -156,6 +141,57 @@ namespace BuscaLogo
         private void Carregar_Click(object sender, EventArgs e)
         {
             OpenFileName = FileManipulation.getFileToRead();
+        }
+    }
+
+    [Serializable]
+    public struct sTweet
+    {
+        public string Text;
+        public string Name;
+        public string DisplayName;
+        public DateTime DateTime;
+        public int RetweetCount;
+        public int FavouriteCount;
+        public long Id;
+        public string IdStr;
+        
+        public sParameters serializeParameters;
+    };
+
+    [Serializable]
+    public class sParameters
+    {
+        public double longitude;
+        public double latitude;
+        public double radius;
+        public bool isKilometer;
+        public byte language;
+        public byte tweettype;
+
+        public sParameters(double L, double l, double r, bool isKM, byte lang, byte type)
+        {
+            longitude = L;
+            latitude = l;
+            radius = r;
+            isKilometer = isKM;
+            language = lang;
+            tweettype = type;
+        }
+    }
+
+    [Serializable]
+    public class TreeIndexCheck
+    {
+        public int index;
+        public int height;
+        public int degree;
+
+        public TreeIndexCheck(int i, int h, int d)
+        {
+            index = i;
+            height = h;
+            degree = d;
         }
     }
 }
