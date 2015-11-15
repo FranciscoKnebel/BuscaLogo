@@ -193,5 +193,12 @@ namespace BuscaLogo
             height = h;
             degree = d;
         }
+
+        override public string ToString()
+        {
+            string aux = string.Format("{0} {1} {2}", index, height, degree);
+
+            return aux;
+        }
     }
 }

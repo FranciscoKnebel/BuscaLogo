@@ -14,52 +14,8 @@ using BTree;
 
 namespace BuscaLogo
 {
-    class FileManipulation
+    public class FileManipulation
     {
-        public static string createBinArrayFile(IEnumerable<ITweet> listOfTweets, TweetSearchParameters searchParameters)
-        {
-            string date = "", time = "";
-            string startDir = Directory.GetCurrentDirectory();
-            string currentDir = startDir + @"\Searches\" + date;
-            string filePath = "";
-
-            GetDateTime(ref date, ref time);
-            if(!Directory.Exists(currentDir))
-                Directory.CreateDirectory(currentDir);
-            Directory.SetCurrentDirectory(currentDir);
-
-            sTweet[] tweetArray = ListToSerialTweet(listOfTweets, listOfTweets.Count(), searchParameters);
-
-            BinaryFormatter bf = new BinaryFormatter();
-            byte[] buffer;
-            using (var ms = new MemoryStream())
-            {
-                bf.Serialize(ms, tweetArray);
-                buffer = ms.ToArray();
-            }
-
-            filePath = String.Format("{0}_{1}.bin", date, time);
-
-            using (BinaryWriter newFile = new BinaryWriter(File.Open(filePath, FileMode.CreateNew)))
-            {
-                newFile.Write(buffer, 0, buffer.Length);
-                newFile.Close();
-            }
-            
-            Directory.SetCurrentDirectory(startDir);
-            return currentDir + filePath;
-        }
-
-        public static sTweet[] readBinArrayFile(string path)
-        {
-            BinaryFormatter formatter = new BinaryFormatter();
-            System.IO.Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
-            sTweet[] tweetArray = (sTweet[])formatter.Deserialize(stream);
-            stream.Close();
-
-            return tweetArray;
-        }
-
         public static string getFileToRead()
         {
             string currentDir = Directory.GetCurrentDirectory() + @"\Searches\";
@@ -83,6 +39,8 @@ namespace BuscaLogo
                 return strFileName;     //returns filepath of chosen file
         }
         
+
+        //Type converters
         public static sTweet[] ListToSerialTweet(IEnumerable<ITweet> listOfTweets, int TweetsInList, TweetSearchParameters searchParameters)
         {
             int index = 0;
@@ -123,7 +81,35 @@ namespace BuscaLogo
             return tweetArray;
         }
 
-        public static string createBinTreeFile(BTree<int, sTweet> Tree)
+        public static sTweet[] BTreeToSerialITweet(BTree<int, sTweet> Tree, TreeIndexCheck check)
+        {
+            Entry<int, sTweet> chave = new Entry<int, sTweet>();
+            sTweet[] TweetArray = new sTweet[check.index];
+
+            for(int index = 0; index < check.index; index++)
+            {
+                chave = Tree.Search(index);
+                TweetArray[index] = chave.Pointer; //salva ponteiro da árvore no array
+            }
+
+            return TweetArray;
+        }
+
+        public static BTree<int, sTweet> SerialITweetToBTree(sTweet[] TweetArray, ref TreeIndexCheck check)
+        {
+            BTree<int, sTweet> Tree = new BTree<int, sTweet>(5);
+
+            int index = 0;
+            foreach(var tweet in TweetArray)
+                Tree.Insert(index++, tweet);
+
+            check = new TreeIndexCheck(--index, Tree.Height, Tree.Degree);
+            return Tree;
+        }
+
+
+        //File manipulators
+        public static string createBinTreeFile(BTree<int, sTweet> Tree, TreeIndexCheck check)
         {
             string filePath;
             string startDir = Directory.GetCurrentDirectory();
@@ -149,29 +135,56 @@ namespace BuscaLogo
             }
 
             Directory.SetCurrentDirectory(startDir);
+            SaveTreeIndex(check.index, check.height, check.degree);
+            
             return currentDir + filePath;
         }
 
-        public static BTree<int, sTweet> readBinTreeFile(string path)
+        public static BTree<int, sTweet> readBinTreeFile(string path, ref TreeIndexCheck check)
         {
+            string currentdir = Directory.GetCurrentDirectory() + @"\Searches\";
+
             BinaryFormatter formatter = new BinaryFormatter();
-            System.IO.Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+            System.IO.Stream stream = new FileStream(currentdir + path, FileMode.Open, FileAccess.Read, FileShare.Read);
             BTree<int, sTweet> Tree = (BTree<int, sTweet>) formatter.Deserialize(stream);
             stream.Close();
+
+            check = ReadTreeIndex(currentdir + @"\treeIndex.bin");
 
             return Tree;
         }
 
-        public static BTree<int, sTweet> SerialITweetToBTree(sTweet[] TweetArray)
+        public static sTweet[] GetNewArrayToBin(BTree<int, sTweet> newTree)
         {
-            BTree<int, sTweet> Tree = new BTree<int, sTweet>(5);
+            TreeIndexCheck checkTree = new TreeIndexCheck(0,0,0);
+            BTree<int, sTweet> Tree = readBinTreeFile("indexedTweets.bin", ref checkTree);
+            sTweet[] auxTweetArray = BTreeToSerialITweet(Tree, checkTree); //auxTweetArray contains the old tree that was in memory
 
+            TreeIndexCheck newTreeCheck = GetTreeIndexCheck(newTree);
+            sTweet[] auxNew = BTreeToSerialITweet(newTree, newTreeCheck);  //auxNew contains the new tree that the function received
+
+            sTweet[] combined = auxTweetArray.Concat(auxNew).ToArray();    //combines the two arrays, with no sorting
+            return combined;
+        }
+
+        //Tree functions
+        public static TreeIndexCheck GetTreeIndexCheck(BTree<int, sTweet> Tree)
+        {
+            TreeIndexCheck check;
             int index = 0;
-            foreach(var tweet in TweetArray)
-                Tree.Insert(index++, tweet);
+            bool flag = false;
+            Entry<int, sTweet> temp;
 
-            SaveTreeIndex(index, Tree.Height, Tree.Degree);
-            return Tree;
+            while(flag != true)
+            {
+                temp = Tree.Search(index++);
+                if(temp == null)
+                    flag = true;
+            }
+
+            check = new TreeIndexCheck(--index, Tree.Height, Tree.Degree);
+
+            return check;
         }
 
         private static void SaveTreeIndex(int index, int height, int degree)
@@ -216,6 +229,81 @@ namespace BuscaLogo
             return check;
         }
 
+        public static void ReadTree(Node<int, sTweet> node, ref string numbers)
+        {
+            if(!node.IsLeaf)
+            {
+                List<Entry<int, sTweet>> leaves = node.Entries;
+
+                foreach(var leaf in leaves)
+                    numbers = numbers + leaf.Key.ToString();
+
+                List<Node<int, sTweet>> children = node.Children;
+
+                foreach(var childrenNode in children)
+                {
+                    ReadTree(childrenNode, ref numbers);
+                }
+            }
+            else
+            {
+                List< Entry<int,sTweet> > leaves = node.Entries;
+
+                foreach(var leaf in leaves)
+                {
+                    numbers = numbers + leaf.Key.ToString();
+                }
+            }
+        }
+
+
+
+
+        //OLD UNUSED CODE//
+        public static string createBinArrayFile(IEnumerable<ITweet> listOfTweets, TweetSearchParameters searchParameters)
+        {
+            string date = "", time = "";
+            string startDir = Directory.GetCurrentDirectory();
+            string currentDir = startDir + @"\Searches\" + date;
+            string filePath = "";
+
+            GetDateTime(ref date, ref time);
+            if(!Directory.Exists(currentDir))
+                Directory.CreateDirectory(currentDir);
+            Directory.SetCurrentDirectory(currentDir);
+
+            sTweet[] tweetArray = ListToSerialTweet(listOfTweets, listOfTweets.Count(), searchParameters);
+
+            BinaryFormatter bf = new BinaryFormatter();
+            byte[] buffer;
+            using(var ms = new MemoryStream())
+            {
+                bf.Serialize(ms, tweetArray);
+                buffer = ms.ToArray();
+            }
+
+            filePath = String.Format("{0}_{1}.bin", date, time);
+
+            using(BinaryWriter newFile = new BinaryWriter(File.Open(filePath, FileMode.CreateNew)))
+            {
+                newFile.Write(buffer, 0, buffer.Length);
+                newFile.Close();
+            }
+
+            Directory.SetCurrentDirectory(startDir);
+            return currentDir + filePath;
+        }
+
+        public static sTweet[] readBinArrayFile(string path)
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            System.IO.Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+            sTweet[] tweetArray = (sTweet[]) formatter.Deserialize(stream);
+            stream.Close();
+
+            return tweetArray;
+        }
+
         private static void GetDateTime(ref string date, ref string time)
         {
             date = DateTime.Now.ToString("yyyy-MM-dd", System.Globalization.DateTimeFormatInfo.InvariantInfo);  //returns string of current date, year-month-day.   Ex: 2015-10-23
@@ -230,12 +318,12 @@ namespace BuscaLogo
 
         private static void OpenUTF8stream(string path)
         {
-            using (FileStream fs = File.OpenRead(path))
+            using(FileStream fs = File.OpenRead(path))
             {
                 byte[] buffer = new byte[1024];
                 UTF8Encoding temp = new UTF8Encoding(true);
 
-                while (fs.Read(buffer, 0, buffer.Length) > 0)
+                while(fs.Read(buffer, 0, buffer.Length) > 0)
                 {
                     MessageBox.Show(temp.GetString(buffer));
                 }

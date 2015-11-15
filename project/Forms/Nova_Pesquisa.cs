@@ -38,17 +38,18 @@ namespace BuscaLogo
             //((KeyValuePair<string, Language>)langParameter.SelectedItem).Value; //get value of selected item in listbox
         }
 
-        public static IEnumerable<sTweet> listOfTweets;
+        public static BTree.BTree<int, sTweet> TreeOfTweets;
         private void button1_Click(object sender, EventArgs e)
         {
-            //string pathfile = "";
-            listOfTweets = Pesquisar();
+            TreeOfTweets = Pesquisar();
 
-            //if(listOfTweets != null) ;
-                //pathfile = FileManipulation.createBinArray(listOfTweets, searchParameters);
+            TreeIndexCheck newCheck = new TreeIndexCheck(0, 0, 0);
+            sTweet[] TweetArray = FileManipulation.GetNewArrayToBin(TreeOfTweets);
+            TreeOfTweets = FileManipulation.SerialITweetToBTree(TweetArray, ref newCheck);
+            FileManipulation.createBinTreeFile(TreeOfTweets, newCheck);
         }
 
-        private IEnumerable<sTweet> Pesquisar()
+        private BTree.BTree<int, sTweet> Pesquisar()
         {
             // Creates the search parameter for the search function.
             var searchParameter = new TweetSearchParameters(searchTextParameter.Text)
@@ -91,7 +92,7 @@ namespace BuscaLogo
             return Pesquisar(searchParameter);
         }
 
-        private IEnumerable<sTweet> Pesquisar(TweetSearchParameters searchParameter)
+        private BTree.BTree<int, sTweet> Pesquisar(TweetSearchParameters searchParameter)
         {
             string aux = button1.Text;
             if ((searchParameter.SearchQuery != "") || (searchParameter.GeoCode != null)) //usuário passou parâmetros
@@ -99,17 +100,16 @@ namespace BuscaLogo
                 progressBar.Show();
                 button1.Text = "Searching, please wait...";
                 IEnumerable<ITweet> list = Search.SearchTweets(searchParameter);
-                progressBar.Step = 25;
+                progressBar.Step = 33;
                 progressBar.PerformStep();
 
                 sTweet[] tweetArray = FileManipulation.ListToSerialTweet(list, list.Count(), searchParameter);
                 progressBar.PerformStep();
 
-                BTree.BTree<int, sTweet> Tree = FileManipulation.SerialITweetToBTree(tweetArray);
+                TreeIndexCheck check = new TreeIndexCheck(0, 0, 0);
+                BTree.BTree<int, sTweet> Tree = FileManipulation.SerialITweetToBTree(tweetArray, ref check);
                 progressBar.PerformStep();
-
-                FileManipulation.createBinTreeFile(Tree);
-                progressBar.PerformStep();
+              
 
                 int i = list.Count();
                 button1.Text = aux;
@@ -117,12 +117,27 @@ namespace BuscaLogo
                 MessageBox.Show("Todos tweets lidos. Retornando a lista com " + i.ToString() + " elementos.");
                 progressBar.Value = 0;
 
-                return listOfTweets;
+                return Tree;
             }
             else
             {
-                MessageBox.Show("Pesquisa sem parâmetros!\nInsira pelos menos um query de texto ou um geolocal.", "ERROR 0001");
+                MessageBox.Show("Pesquisa sem parâmetros!\nInsira pelos menos um query de texto ou um geolocal.", "ERROR 001");
                 return null;
+            }
+        }
+
+        private bool checkTreeFileIntegrity(BTree.BTree<int, sTweet> tree, TreeIndexCheck checkNewTree)
+        {
+            if(tree.Degree != checkNewTree.degree || tree.Height != checkNewTree.height)
+            {
+                MessageBox.Show(@"Problema com a árvore lida! Houve problema no salvamento dos arquivos,
+                                \nOu alguém alterou informações de dentro dos arquivos.", "ERRO 004");
+                return false;
+            }
+            else
+            {
+                MessageBox.Show(String.Format("Árvore salva com sucesso!\n\nHeight:\t{0}\nDegree:\t{1}\nIndex:\t{2}", tree.Height, tree.Degree, checkNewTree.index));
+                return true;
             }
         }
 
