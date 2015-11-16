@@ -202,7 +202,7 @@ namespace BuscaLogo
 
             for(int i = 0; i < newArray.Count(); i++)
             {
-                if(final.Contains(i))
+                if(flagindex.Contains(i) == false)
                     final.Add(newArray.ElementAt(i));
             }
 

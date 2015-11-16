@@ -25,7 +25,7 @@ namespace BuscaLogo.Forms
         {
             InitializeComponent();
 
-            string ReadFile = BuscaLogo.Inicio.OpenFileName;
+            string ReadFile = @"/indexedTweets.bin";//BuscaLogo.Inicio.OpenFileName;
 
             if(ReadFile != String.Empty)
             {
