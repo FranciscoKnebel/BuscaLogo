@@ -100,6 +100,7 @@ namespace BuscaLogo
                 progressBar.Show();
                 button1.Text = "Searching, please wait...";
                 IEnumerable<ITweet> list = Search.SearchTweets(searchParameter);
+
                 progressBar.Step = 33;
                 progressBar.PerformStep();
 

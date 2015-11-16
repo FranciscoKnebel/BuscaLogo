@@ -145,7 +145,7 @@ namespace BuscaLogo
     }
 
     [Serializable]
-    public struct sTweet
+    public class sTweet
     {
         public string Text;
         public string Name;
@@ -157,6 +157,23 @@ namespace BuscaLogo
         public string IdStr;
         
         public sParameters serializeParameters;
+
+        public sTweet(string T, string N, string DisplayN, DateTime Date, int RetweetC, int FavouriteC, long Identif, string IdentifStr)
+        {
+            Text = T;
+            Name = N;
+            DisplayName = DisplayN;
+            DateTime = Date;
+            RetweetCount = RetweetC;
+            FavouriteCount = FavouriteC;
+            Id = Identif;
+            IdStr = IdentifStr;
+        }
+
+        public sTweet()
+        {
+
+        }
     };
 
     [Serializable]

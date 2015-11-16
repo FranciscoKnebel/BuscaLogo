@@ -13,6 +13,8 @@ using BuscaLogo;
 using BuscaLogo.Classes;
 using Tweetinvi.Core.Interfaces;
 
+using BTree;
+
 namespace BuscaLogo.Forms
 {
     public partial class Tweet_Reader : Form
@@ -27,8 +29,12 @@ namespace BuscaLogo.Forms
 
             if(ReadFile != String.Empty)
             {
-                sList = FileManipulation.readBinArrayFile(ReadFile);
-                
+                //sList = FileManipulation.readBinArrayFile(ReadFile);
+                TreeIndexCheck check = new TreeIndexCheck(0, 0, 0);
+                BTree<int,sTweet> Tree = FileManipulation.readBinTreeFile(ReadFile, ref check);
+
+                sList = FileManipulation.BTreeToSerialITweet(Tree, check);
+
                 if(sList != null)
                     buildListBox(sList.Count());
             }

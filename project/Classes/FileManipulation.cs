@@ -11,6 +11,7 @@ using Tweetinvi.Core.Interfaces;
 using Tweetinvi.Core.Parameters;
 
 using BTree;
+using System.Collections;
 
 namespace BuscaLogo
 {
@@ -51,31 +52,34 @@ namespace BuscaLogo
 
             foreach (var tweet in listOfTweets)
             {
-                tweetArray[index].Text  = tweet.Text;
-                tweetArray[index].Name  = tweet.CreatedBy.Name;
-                tweetArray[index].DisplayName       = tweet.CreatedBy.ScreenName;
-                tweetArray[index].DateTime          = tweet.CreatedAt;
-                tweetArray[index].RetweetCount      = tweet.RetweetCount;
-                tweetArray[index].FavouriteCount    = tweet.FavouriteCount;
-                tweetArray[index].Id    = tweet.Id;
-                tweetArray[index].IdStr = tweet.IdStr;
+                tweetArray[index] = new sTweet(tweet.Text, tweet.CreatedBy.Name, tweet.CreatedBy.ScreenName, tweet.CreatedAt, tweet.RetweetCount, tweet.FavouriteCount, tweet.Id, tweet.IdStr);
 
-                if(aux.DistanceMeasure == Tweetinvi.Core.Enum.DistanceMeasure.Kilometers)
-                    isKilo = true;
-                else
-                    isKilo = false;
+                if(aux != null)
+                {
+                    if(aux.DistanceMeasure == Tweetinvi.Core.Enum.DistanceMeasure.Kilometers)
+                        isKilo = true;
+                    else
+                        isKilo = false;
 
-                tweetArray[index].serializeParameters = new sParameters
-                (
+                    tweetArray[index].serializeParameters = new sParameters
+                    (
                     aux.Coordinates.Longitude,
                     aux.Coordinates.Latitude,
                     aux.Radius,
                     isKilo,
                     (byte) searchParameters.Lang,
                     (byte) searchParameters.TweetSearchType
-                );
+                    );
 
-                index++;
+                    index++;
+                }
+                else
+                {
+                    tweetArray[index].serializeParameters = new sParameters(-1, -1, -1, false, (byte) searchParameters.Lang, (byte) searchParameters.TweetSearchType);
+
+                    index++;
+                }
+
             }
 
             return tweetArray;
@@ -103,7 +107,7 @@ namespace BuscaLogo
             foreach(var tweet in TweetArray)
                 Tree.Insert(index++, tweet);
 
-            check = new TreeIndexCheck(--index, Tree.Height, Tree.Degree);
+            check = new TreeIndexCheck(index, Tree.Height, Tree.Degree);
             return Tree;
         }
 
@@ -157,14 +161,52 @@ namespace BuscaLogo
         public static sTweet[] GetNewArrayToBin(BTree<int, sTweet> newTree)
         {
             TreeIndexCheck checkTree = new TreeIndexCheck(0,0,0);
-            BTree<int, sTweet> Tree = readBinTreeFile("indexedTweets.bin", ref checkTree);
-            sTweet[] auxTweetArray = BTreeToSerialITweet(Tree, checkTree); //auxTweetArray contains the old tree that was in memory
+            sTweet[] auxNew;
+            
+            TreeIndexCheck newTreeCheck;
 
-            TreeIndexCheck newTreeCheck = GetTreeIndexCheck(newTree);
-            sTweet[] auxNew = BTreeToSerialITweet(newTree, newTreeCheck);  //auxNew contains the new tree that the function received
+            if(!File.Exists(Directory.GetCurrentDirectory() + @"\Searches\indexedTweets.bin"))
+            {
+                newTreeCheck = GetTreeIndexCheck(newTree);
+                auxNew = BTreeToSerialITweet(newTree, newTreeCheck);  //auxNew contains the new tree that the function received
 
-            sTweet[] combined = auxTweetArray.Concat(auxNew).ToArray();    //combines the two arrays, with no sorting
-            return combined;
+                return auxNew;
+            }            
+            else
+            {
+                BTree<int, sTweet> Tree = readBinTreeFile("indexedTweets.bin", ref checkTree);
+                sTweet[] auxTweetArray = BTreeToSerialITweet(Tree, checkTree); //auxTweetArray contains the old tree that was in memory
+
+                newTreeCheck = GetTreeIndexCheck(newTree);
+                auxNew = BTreeToSerialITweet(newTree, newTreeCheck);  //auxNew contains the new tree that the function received
+
+                //sTweet[] combined = auxTweetArray.Concat(auxNew).ToArray();    //combines the two arrays, with no sorting
+
+                //combined = checkIfRepeatedTweets(combined);
+
+                sTweet[] combined = checkIfRepeatedTweets(auxNew, auxTweetArray);
+
+                return combined;
+            }
+        }
+
+        private static sTweet[] checkIfRepeatedTweets(sTweet[] newArray, sTweet[] oldArray)
+        {
+            ArrayList flagindex = new ArrayList();
+            ArrayList final = new ArrayList(oldArray);
+
+            for(int i = 0; i < oldArray.Count(); i++)
+                for(int j = 0; j < newArray.Count(); j++)
+                    if(oldArray.ElementAt(i).Id == newArray.ElementAt(j).Id)
+                        flagindex.Add(j);
+
+            for(int i = 0; i < newArray.Count(); i++)
+            {
+                if(final.Contains(i))
+                    final.Add(newArray.ElementAt(i));
+            }
+
+            return (sTweet[]) final.ToArray(typeof(sTweet));
         }
 
         //Tree functions
@@ -255,8 +297,6 @@ namespace BuscaLogo
                 }
             }
         }
-
-
 
 
         //OLD UNUSED CODE//
