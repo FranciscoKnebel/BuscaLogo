@@ -161,6 +161,7 @@
     <Compile Include="Classes\ArvoreBinaria.cs" />
     <Compile Include="Classes\AutoPost.cs" />
     <Compile Include="Classes\FileManipulation.cs" />
+    <Compile Include="Classes\Sort.cs" />
     <Compile Include="Forms\Tweet _Reader.cs">
       <SubType>Form</SubType>
     </Compile>

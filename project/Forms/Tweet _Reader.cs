@@ -14,32 +14,33 @@ using BuscaLogo.Classes;
 using Tweetinvi.Core.Interfaces;
 
 using BTree;
+using System.IO;
 
 namespace BuscaLogo.Forms
 {
     public partial class Tweet_Reader : Form
     {
         sTweet[] sList;
+        BTree<int, sTweet> sTree;
 
         public Tweet_Reader()
         {
             InitializeComponent();
 
-            string ReadFile = @"/indexedTweets.bin";//BuscaLogo.Inicio.OpenFileName;
+            string ReadFile = @"\indexedTweets.bin";
 
-            if(ReadFile != String.Empty)
+            if(File.Exists(Directory.GetCurrentDirectory() + @"\Searches" + ReadFile))
             {
-                //sList = FileManipulation.readBinArrayFile(ReadFile);
                 TreeIndexCheck check = new TreeIndexCheck(0, 0, 0);
-                BTree<int,sTweet> Tree = FileManipulation.readBinTreeFile(ReadFile, ref check);
-
-                sList = FileManipulation.BTreeToSerialITweet(Tree, check);
+                sTree = FileManipulation.readBinTreeFile(ReadFile, ref check);
+                sList = FileManipulation.BTreeToSerialITweet(sTree, check);
 
                 if(sList != null)
-                    buildListBox(sList.Count());
+                    buildListBox(false, 1);
             }
             else
             {
+                MessageBox.Show(ReadFile);
                 BackgroundNull.BringToFront();
                 label1.BringToFront();
 
@@ -63,8 +64,51 @@ namespace BuscaLogo.Forms
             TweetList.SelectedIndex = 0;
         }
 
-        private void Tweet_ShowSelected(object sender, EventArgs e) //activates when selected index of TweetList changes
+        private void buildListBox(bool crescente, byte sort)
         {
+            sTweet[] sorted;
+
+            switch(sort)
+            {
+                case 1: //DateTime
+                    sorted = sList.OrderBy(item => item.DateTime).ToArray();
+
+                    break;
+                case 2: //DisplayName
+                    sorted = sList.OrderBy(item => item.DisplayName).ToArray();
+
+                    break;
+                case 3: //Name
+                    sorted = sList.OrderBy(item => item.Name).ToArray();
+
+                    break;
+                case 4: //RetweetCount;
+                    sorted = sList.OrderBy(item => item.RetweetCount).ToArray();
+
+                    break;
+                case 5: //FavouriteCount
+                    sorted = sList.OrderBy(item => item.FavouriteCount).ToArray();
+
+                    break;
+                default: //order by ID
+                    sorted = sList.OrderBy(item => item.Id).ToArray();
+                    break;
+            }
+
+            if(!crescente)
+                sorted = sorted.Reverse().ToArray();
+
+            sList = sorted;
+            buildListBox(sList.Count());            
+        }
+
+        private void searchTree(string user)
+        {
+            
+        }
+
+        private void Tweet_ShowSelected(object sender, EventArgs e)
+        {                                       //activates when selected index of TweetList changes
             if (sList != null)
             {
                 int selectedIndex = TweetList.SelectedIndex;
@@ -98,13 +142,48 @@ namespace BuscaLogo.Forms
 
         private void TweetRefresh_Click(object sender, EventArgs e)
         {
-            string ReadFile = BuscaLogo.Inicio.OpenFileName;
-
-            if(ReadFile != String.Empty)
+            if(File.Exists(Directory.GetCurrentDirectory() + @"\Searches\indexedTweets.bin"))
             {
-                sList = FileManipulation.readBinArrayFile(ReadFile);
-                buildListBox(sList.Count());
+                TreeIndexCheck check = new TreeIndexCheck(0, 0, 0);
+                sTree = FileManipulation.readBinTreeFile(@"\indexedTweets.bin", ref check);
+                sList = FileManipulation.BTreeToSerialITweet(sTree, check);
+
+                buildListBox(crescentOrder.Checked, 1);
             }
+            else
+            {
+                MessageBox.Show("Não foi possível localizar o arquivo.");
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            buildListBox(crescentOrder.Checked, 1); //DateTime
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            buildListBox(crescentOrder.Checked, 2); //DisplayName
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            buildListBox(crescentOrder.Checked, 3); //Name
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            buildListBox(crescentOrder.Checked, 4); //RetweetCount
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            buildListBox(crescentOrder.Checked, 5); //FavouriteCount
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            buildListBox(crescentOrder.Checked, 6); //Id
         }
     }
 }
