@@ -49,6 +49,20 @@ namespace BuscaLogo.Forms
             }
         }
 
+        public Tweet_Reader(sTweet[] lista)
+        {
+            InitializeComponent();
+
+            sList = lista;
+
+            buscaUsuario.Hide();
+            TweetRefresh.Hide();    //Hides buttons that don't make sense in user search
+            button2.Hide();
+            button3.Hide();
+
+            buildListBox(crescentOrder.Checked, 1);            
+        }
+
         private void buildListBox(int contador)
         {
             Dictionary<string, sTweet> tableSource = new Dictionary<string, sTweet>();
@@ -102,9 +116,73 @@ namespace BuscaLogo.Forms
             buildListBox(sList.Count());            
         }
 
+
+        public Form AuxTweetReader;
         private void searchTree(string user)
         {
+            BTree<string, List<sTweet>> userTree = buildUserTree(5);
+            Entry<string, List<sTweet>> entrada = userTree.Search(user);
             
+            if(AuxTweetReader != null)
+            {
+                if(!AuxTweetReader.Created)
+                {
+                    AuxTweetReader = new Forms.Tweet_Reader(entrada.Pointer.ToArray());
+                    try
+                    {
+                        AuxTweetReader.Show();
+                    }
+                    catch(ObjectDisposedException)
+                    {
+                        AuxTweetReader = new Forms.Tweet_Reader(entrada.Pointer.ToArray());
+                        AuxTweetReader.Show();
+                    }
+                    AuxTweetReader.Activate();
+                }
+            }
+            else
+            {
+                AuxTweetReader = new Forms.Tweet_Reader(entrada.Pointer.ToArray());
+                AuxTweetReader.Show();
+                AuxTweetReader.Activate();
+            }
+
+            AuxTweetReader.Text = "Pesquisa por usuário";
+            AuxTweetReader.BringToFront();
+        }
+
+        private BTree<string, List<sTweet>> buildUserTree(int degree)
+        {
+            BTree<string, List<sTweet>> userTree = new BTree<string, List<sTweet>>(degree);
+            Dictionary<string, List<sTweet>> users = new Dictionary<string, List<sTweet>>();
+
+
+            foreach(var aux in sList)
+            {
+                if(!users.ContainsKey(aux.DisplayName))
+                {
+                    List<sTweet> tweets = new List<sTweet>();
+                    tweets.Add(aux);
+
+                    users.Add(aux.DisplayName, tweets);
+                }
+                else
+                {
+                    List<sTweet> tweets = new List<sTweet>();
+
+                    users.TryGetValue(aux.DisplayName, out tweets);
+                    tweets.Add(aux);
+                    users[aux.DisplayName] = tweets;
+                }
+            }
+
+
+            foreach(var entry in users)
+            {
+                userTree.Insert(entry.Key, entry.Value);
+            }
+
+            return userTree;
         }
 
         private void Tweet_ShowSelected(object sender, EventArgs e)
@@ -184,6 +262,11 @@ namespace BuscaLogo.Forms
         private void button6_Click(object sender, EventArgs e)
         {
             buildListBox(crescentOrder.Checked, 6); //Id
+        }
+
+        private void buscaUsuario_Click(object sender, EventArgs e)
+        {
+            searchTree("chicoknebel");
         }
     }
 }

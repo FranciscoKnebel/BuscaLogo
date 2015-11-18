@@ -49,6 +49,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.buscaUsuario = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.BackgroundNull)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageRT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageFV)).BeginInit();
@@ -257,11 +258,22 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
+            // buscaUsuario
+            // 
+            this.buscaUsuario.Location = new System.Drawing.Point(45, 430);
+            this.buscaUsuario.Name = "buscaUsuario";
+            this.buscaUsuario.Size = new System.Drawing.Size(117, 23);
+            this.buscaUsuario.TabIndex = 21;
+            this.buscaUsuario.Text = "Buscar por usuário";
+            this.buscaUsuario.UseVisualStyleBackColor = true;
+            this.buscaUsuario.Click += new System.EventHandler(this.buscaUsuario_Click);
+            // 
             // Tweet_Reader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(548, 465);
+            this.Controls.Add(this.buscaUsuario);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
@@ -316,5 +328,6 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button buscaUsuario;
     }
 }
