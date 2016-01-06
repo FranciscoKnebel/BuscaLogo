@@ -36,7 +36,7 @@
             this.IconAreaNotif = new System.Windows.Forms.NotifyIcon(this.components);
             this.NovaPesquisa = new System.Windows.Forms.Button();
             this.Carregar = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.Deletar = new System.Windows.Forms.Button();
             this.Logo = new System.Windows.Forms.PictureBox();
             this.TweetReaderButton = new System.Windows.Forms.Button();
             this.MenuContext.SuspendLayout();
@@ -97,15 +97,16 @@
             this.Carregar.UseVisualStyleBackColor = true;
             this.Carregar.Click += new System.EventHandler(this.Carregar_Click);
             // 
-            // button5
+            // Deletar
             // 
-            this.button5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button5.Location = new System.Drawing.Point(249, 219);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(58, 30);
-            this.button5.TabIndex = 6;
-            this.button5.Text = "Deletar";
-            this.button5.UseVisualStyleBackColor = true;
+            this.Deletar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Deletar.Location = new System.Drawing.Point(249, 219);
+            this.Deletar.Name = "Deletar";
+            this.Deletar.Size = new System.Drawing.Size(58, 30);
+            this.Deletar.TabIndex = 6;
+            this.Deletar.Text = "Deletar";
+            this.Deletar.UseVisualStyleBackColor = true;
+            this.Deletar.Click += new System.EventHandler(this.Deletar_Click);
             // 
             // Logo
             // 
@@ -138,7 +139,7 @@
             this.ClientSize = new System.Drawing.Size(319, 261);
             this.ContextMenuStrip = this.MenuContext;
             this.Controls.Add(this.TweetReaderButton);
-            this.Controls.Add(this.button5);
+            this.Controls.Add(this.Deletar);
             this.Controls.Add(this.Carregar);
             this.Controls.Add(this.NovaPesquisa);
             this.Controls.Add(this.Logo);
@@ -165,7 +166,7 @@
         private System.Windows.Forms.NotifyIcon IconAreaNotif;
         private System.Windows.Forms.Button NovaPesquisa;
         private System.Windows.Forms.Button Carregar;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button Deletar;
         private System.Windows.Forms.ToolStripMenuItem fecharToolStripMenuItem;
         private System.Windows.Forms.Button TweetReaderButton;
     }

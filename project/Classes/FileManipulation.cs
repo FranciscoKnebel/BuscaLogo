@@ -39,7 +39,6 @@ namespace BuscaLogo
             else
                 return strFileName;     //returns filepath of chosen file
         }
-        
 
         //Type converters
         public static sTweet[] ListToSerialTweet(IEnumerable<ITweet> listOfTweets, int TweetsInList, TweetSearchParameters searchParameters)
@@ -207,6 +206,14 @@ namespace BuscaLogo
             }
 
             return (sTweet[]) final.ToArray(typeof(sTweet));
+        }
+
+        public static bool DeleteFiles()
+        {
+            File.Delete(Directory.GetCurrentDirectory() + @"\Searches\indexedTweets.bin");
+            File.Delete(Directory.GetCurrentDirectory() + @"\Searches\treeIndex.bin");
+
+            return true;
         }
 
         //Tree functions

@@ -18,6 +18,9 @@ namespace BuscaLogo
         public Inicio()
         {
             InitializeComponent();
+
+            Carregar.Hide();
+            //Deletar.Hide();
         }
 
         private void Inicio_Load(object sender, EventArgs e)
@@ -140,7 +143,14 @@ namespace BuscaLogo
         public static string OpenFileName = String.Empty;
         private void Carregar_Click(object sender, EventArgs e)
         {
-            OpenFileName = FileManipulation.getFileToRead();
+            //OpenFileName = FileManipulation.getFileToRead();
+        }
+
+        private void Deletar_Click(object sender, EventArgs e)
+        {
+            DialogResult choice = MessageBox.Show("Você tem certeza disso? Todas as suas buscas serão apagadas.", "Busca por usuário", MessageBoxButtons.YesNo);
+            if(choice == DialogResult.Yes)
+                FileManipulation.DeleteFiles();
         }
     }
 

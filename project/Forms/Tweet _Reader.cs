@@ -40,7 +40,6 @@ namespace BuscaLogo.Forms
             }
             else
             {
-                MessageBox.Show(ReadFile);
                 BackgroundNull.BringToFront();
                 label1.BringToFront();
 
@@ -122,33 +121,41 @@ namespace BuscaLogo.Forms
         {
             BTree<string, List<sTweet>> userTree = buildUserTree(5);
             Entry<string, List<sTweet>> entrada = userTree.Search(user);
-            
-            if(AuxTweetReader != null)
+
+            if(entrada != null)
             {
-                if(!AuxTweetReader.Created)
+                if(AuxTweetReader != null)
                 {
-                    AuxTweetReader = new Forms.Tweet_Reader(entrada.Pointer.ToArray());
-                    try
-                    {
-                        AuxTweetReader.Show();
-                    }
-                    catch(ObjectDisposedException)
+                    if(!AuxTweetReader.Created)
                     {
                         AuxTweetReader = new Forms.Tweet_Reader(entrada.Pointer.ToArray());
-                        AuxTweetReader.Show();
+                        try
+                        {
+                            AuxTweetReader.Show();
+                        }
+                        catch(ObjectDisposedException)
+                        {
+                            AuxTweetReader = new Forms.Tweet_Reader(entrada.Pointer.ToArray());
+                            AuxTweetReader.Show();
+                        }
+                        AuxTweetReader.Activate();
                     }
+                }
+                else
+                {
+                    AuxTweetReader = new Forms.Tweet_Reader(entrada.Pointer.ToArray());
+                    AuxTweetReader.Show();
                     AuxTweetReader.Activate();
                 }
+
+                AuxTweetReader.Text = "Pesquisa por usuário";
+                AuxTweetReader.BringToFront();
             }
             else
             {
-                AuxTweetReader = new Forms.Tweet_Reader(entrada.Pointer.ToArray());
-                AuxTweetReader.Show();
-                AuxTweetReader.Activate();
+                DialogResult choice = MessageBox.Show("Usuário não encontrado.", "Busca por Usuário", MessageBoxButtons.OK);
             }
-
-            AuxTweetReader.Text = "Pesquisa por usuário";
-            AuxTweetReader.BringToFront();
+            
         }
 
         private BTree<string, List<sTweet>> buildUserTree(int degree)
@@ -266,7 +273,22 @@ namespace BuscaLogo.Forms
 
         private void buscaUsuario_Click(object sender, EventArgs e)
         {
-            searchTree("chicoknebel");
+            AskString testDialog = new AskString();
+
+            // Show testDialog as a modal dialog and determine if DialogResult = OK.
+            if(testDialog.ShowDialog(this) == DialogResult.OK)
+            {
+                // Read the contents of testDialog's TextBox.
+                string user = testDialog.textBox1.Text;
+                testDialog.Dispose();
+
+                searchTree(user);
+            }
+            else
+            {
+                testDialog.Dispose();
+            }
+            
         }
     }
 }
