@@ -20,19 +20,20 @@ namespace BuscaLogo
             InitializeComponent();
 
             Carregar.Hide();
-            //Deletar.Hide();
         }
 
         private void Inicio_Load(object sender, EventArgs e)
         {
-            Credenciais(); //Setup das credenciais do API  
+            Credentials(); //Setup das credenciais do API  
         }
 
-        private void Credenciais()
+        private void Credentials()
         {
             // Set up your credentials (https://apps.twitter.com)
             // These are application-only credentials, so you can't tweet.
-            Auth.SetApplicationOnlyCredentials(Properties.Settings.Default.consumerKey, Properties.Settings.Default.consumerSecret, true);
+            string consumerKey = "";
+            string consumerSecret = "";
+            Auth.SetApplicationOnlyCredentials(consumerKey, consumerSecret, true);
         }
         
         public Form newSearch;
