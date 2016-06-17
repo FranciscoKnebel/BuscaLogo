@@ -1,4 +1,6 @@
 # BuscaLogo
+![](/project/Resources/bird.png)
+
 Twitter search and data analyzing.
 Uses [Tweetinvi](https://github.com/linvi/tweetinvi) in C# to communicate and use the Twitter API.
 
